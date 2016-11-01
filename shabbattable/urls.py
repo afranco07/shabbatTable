@@ -16,15 +16,15 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import include
-from rango import views as rview
+#from rango import views as rview
 from frijay import views as fview
 
 urlpatterns = [
-    url(r'^rango/', include('rango.urls')),
+    #url(r'^rango/', include('rango.urls')),
     url(r'^frijay/', include('frijay.urls')),
+    # above maps any URLs starting with frijay/
+    # to be handled by the frijay application (see frijay/urls.py)
     url(r'^$', fview.redir, name='redir'),
-    #url(r'^$', fview.index, name='index'),
-    #above maps any URLs starting with rango/
-    #to be handled by the rango application
+    #above maps root (domain.com/) to fview.redir.
     url(r'^admin/', admin.site.urls),
 ]

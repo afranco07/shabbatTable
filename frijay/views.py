@@ -21,6 +21,20 @@ def about(request):
 
     return render(request, 'frijay/about.html', context_dict)
 
+def about(request):
+    context_dict = {'title': "Signup"}
+
+    return render(request, 'frijay/signup.html', context_dict)
+
+def about(request):   
+    context_dict = {'title': "Login"}
+
+    return render(request, 'frijay/login.html', context_dict)
+
+def about(request):   
+    context_dict = {'title': "Profile"}
+
+    return render(request, 'frijay/profile.html', context_dict)
 
 def redir(request):
     return redirect('/frijay')

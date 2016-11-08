@@ -4,4 +4,4 @@ In addition, server can be launched via gunicorn using the command "gunicorn sha
 
 The admin panel can be reached at 127.0.0.1:8000/admin/
 
-
+Website is deployed at [heroku](http://shabbattable.herokuapp.com/frijay/)

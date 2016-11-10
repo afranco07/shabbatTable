@@ -1,4 +1,4 @@
-from __future__ import unicode_literals
+'''Models for the frijay app'''
 from django.db import models
 
 # Create your models here.
@@ -12,4 +12,12 @@ class User(models.Model):
     password = models.CharField(max_length=60)
 
     def __str__(self):
-        return self.first_name
+        return self.first_name + self.last_name
+
+class Event(models.Model):
+    title = models.CharField(max_length=80)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    modified_at = models.DateTimeField(auto_now=True, editable=False)
+
+    def __str__(self):
+        return self.title

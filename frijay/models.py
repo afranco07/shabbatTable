@@ -13,3 +13,11 @@ class User(models.Model):
 
     def __str__(self):
         return self.first_name
+
+class Event(models.Model):
+    title = models.CharField(max_length=80)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    modified_at = models.DateTimeField(auto_now=True, editable=False)
+
+    def __str__(self):
+        return self.title

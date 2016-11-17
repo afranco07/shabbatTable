@@ -1,4 +1,4 @@
-'''Models for the frijay app are created here.'''
+'''Models for the frijay app are created here. '''
 from django.db import models
 
 

@@ -16,11 +16,9 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import include
-#from rango import views as rview
 from frijay import views as fview
 
 urlpatterns = [
-    #url(r'^rango/', include('rango.urls')),
     url(r'^frijay/', include('frijay.urls')),
     # above maps any URLs starting with frijay/
     # to be handled by the frijay application (see frijay/urls.py)

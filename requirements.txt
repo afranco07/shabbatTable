@@ -6,4 +6,5 @@ lazy-object-proxy==1.2.2
 mccabe==0.5.2
 pylint==1.6.4
 six==1.10.0
+whitenoise==3.2.2
 wrapt==1.10.8

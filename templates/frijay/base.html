@@ -19,10 +19,7 @@
 {#      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>#}
     <![endif]-->
   </head>
-  {% block body %}
   <body>
-  	<h1>Hello, world!</h1>
-{% block navBarBlock %}    
 <!-- ============================This is the navbar========================= -->
 				<nav class="navbar navbar-default">
 		  <div class="container-fluid">
@@ -78,11 +75,13 @@
 		  </div><!-- /.container-fluid -->
 		</nav>
 <!-- ============================This is the navbar========================= -->
-{% endblock %}
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{%  static 'js/bootstrap.min.js' %}"></script>
+    
+    {% block body %}
+    {% endblock %}
+    
   </body>
-  {%  endblock %}
 </html>

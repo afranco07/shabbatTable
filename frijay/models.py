@@ -20,6 +20,12 @@ class Event(models.Model):
     title = models.CharField(max_length=80)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     modified_at = models.DateTimeField(auto_now=True, editable=False)
+    address =  models.CharField(max_length=200, null=True)
+    host = models.ForeignKey('User', on_delete=models.CASCADE, null=True)
+    date = models.DateField(null=True)
+    time = models.TimeField(null=True)
+    openSeats = models.IntegerField(null=True)
+    additionalDetails = models.TextField(null=True)
 
     def __str__(self):
         '''Makes the string representation

@@ -3,7 +3,7 @@
     background-color: rgba(255,255,255,0.8);
 }
 .jumbotron{
-    height: 400px;
+    height: 500px;
     margin-top: 0!important;
     background-image: url(../images/image1.jpg);
     background-position: 0% 25%;
@@ -12,10 +12,14 @@
     color: white;
 }
 .jumbotron h1{
-    padding-top: 150px;
-    font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+    opacity: 0.8;
+    padding-top: 200px;
+    font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
     text-align: center;
 }
 .jumbotron p{
+    text-align: center;
+}
+.caption{
     text-align: center;
 }

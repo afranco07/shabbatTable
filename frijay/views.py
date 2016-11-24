@@ -1,20 +1,14 @@
 '''Views for the frijay app'''
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, redirect
 from frijay.forms import UserForm, UserProfileForm
 
 
 def index(request):
-    '''index page view
-    Construct a dictionary to pass to the template engine as its context.
-    Note the key title is the same as {{ title }} in the template!
-
-    Return a rendered response to send to the client.
-    Shortcut function 'render()' is used to make coding simpler.
-    Note that the first parameter is the template we wish to use.
-    '''
+    '''index page view'''
     context_dict = {'title': "Frijay!"}
     return render(request, 'frijay/index.html', context_dict)
 
@@ -109,7 +103,7 @@ def user_login(request):
                 return HttpResponseRedirect(reverse('index'))
             else:
             # An inactive account was used - no logging in!
-                return HttpResponse("Your Rango account is disabled.")
+                return HttpResponse("Your account is disabled.")
         else:
             # Bad login details were provided. So we can't log the user in.
             print("Invalid login details: {0}, {1}".format(username, password))
@@ -118,15 +112,18 @@ def user_login(request):
     else:
         # No context variables to pass to the template system, hence the # blank dictionary object...
         return render(request, 'frijay/login.html', {})
-            # context_dict = {'title': "Login"}
-            # return render(request, 'frijay/login.html', context_dict)
 
+@login_required
+def user_logout(request):
+    # Only logout if user is already logged in
+    logout(request)
+    # Take the user back to the homepage.
+    return HttpResponseRedirect(reverse('index'))
 
 def profile(request):
     '''user profile page view'''
     context_dict = {'title': "Profile"}
     return render(request, 'frijay/profile.html', context_dict)
-
 
 def redir(request):
     '''redirection view'''

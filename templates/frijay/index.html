@@ -4,9 +4,73 @@
     Index
 {% endblock %}
 {% block body %}
-	<h1>Frijay Test</h1>
-	<div>
-	<p>Testing 1 2 3</p>
-	</div>
-	<p><a href="about">about</a></p>
+    <div class="jumbotron">
+        <h1>Friday Dinner</h1>
+        <p><a class="btn btn-danger btn-md" href="signup.html" role="button">Sign Up</a></p>
+    </div>
+     <hr class="featurette-divider">
+        <h3 style="text-align: center"> Search for Event</h3>
+    <div class="form-group">
+				  <input type="text" class="form-control" placeholder="Zip Code">
+				</div>
+    <br><br>
+     <hr class="featurette-divider">
+
+    <div class="row">
+  <div class="col-sm-4 col-md-3">
+    <div class="thumbnail">
+      <img src="{% static "images/image2.jpg" %}" alt="My image" />
+      <div class="caption">
+        <h3>Event 1</h3>
+          <p>Date</p>
+          <p>Time</p>
+          <p>Number of people attending</p>
+        <p><a href="#" class="btn btn-primary" role="button">Reserve</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-4 col-md-3">
+    <div class="thumbnail">
+      <img src="{% static "images/image3.jpg" %}" alt="My image" />
+      <div class="caption">
+        <h3>Event 2</h3>
+         <p>Date</p>
+          <p>Time</p>
+          <p>Number of people attending</p>
+        <p><a href="#" class="btn btn-primary" role="button">Reserve</a> </p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-4 col-md-3">
+    <div class="thumbnail">
+      <img src="{% static "images/image6.jpg" %}" alt="My image" />
+      <div class="caption">
+        <h3>Event 3</h3>
+         <p>Date</p>
+          <p>Time</p>
+          <p>Number of people attending</p>
+        <p><a href="#" class="btn btn-primary" role="button">Reserve</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-4 col-md-3">
+    <div class="thumbnail">
+      <img src="{% static "images/image7.jpg" %}" alt="My image" />
+      <div class="caption">
+        <h3>Event 4</h3>
+         <p>Date</p>
+          <p>Time</p>
+          <p>Number of people attending</p>
+        <p><a href="#" class="btn btn-primary" role="button">Reserve</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+ <hr class="featurette-divider">
+<!-- FOOTER -->
+      <footer>
+        <p style="text-align: right"><a href="#">Back to top</a></p>
+        <p>&copy; 2014 Frijay, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+
 {% endblock %}

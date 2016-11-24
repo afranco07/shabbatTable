@@ -1,6 +1,7 @@
 '''Views for the frijay app'''
 from django.shortcuts import render, redirect
 from frijay.forms import UserForm, UserProfileForm
+from django.http import HttpResponse
 
 def index(request):
     '''index page view
@@ -97,3 +98,11 @@ def profile(request):
 def redir(request):
     '''redirection view'''
     return redirect('/frijay')
+
+def events(request):
+    '''Reservations View'''
+    return render(request, 'frijay/events.html')
+
+def reservationsEvent(request, event_id):
+    '''Reservations view for specific event'''
+    return HttpResponse("<h2>Details for event id " + str(event_id) + "</h2>")

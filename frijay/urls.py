@@ -8,4 +8,8 @@ urlpatterns = [
     url(r'^login/', views.login, name='login'),
     url(r'^signup/', views.signup, name='signup'),
     url(r'^profile/', views.profile, name='profile'),
+    #reservations page
+    url(r'^events/', views.events, name='events'),
+    #specific reservation view
+    url(r'^(?P<event_id>[0-9]+)/$', views.reservationsEvent, name='reservationsEvent'),
 ]

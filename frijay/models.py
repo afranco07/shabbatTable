@@ -1,18 +1,17 @@
 '''Models for the frijay app are created here. '''
 from django.db import models
+from django.contrib.auth.models import User
 
+class UserProfile(models.Model):
+    '''Links UserProfile to a User model instance.'''
+    user = models.OneToOneField(User)
 
-class User(models.Model):
-    '''A model for users of frijay'''
-    first_name = models.CharField(max_length=60)
-    last_name = models.CharField(max_length=60)
-    email = models.CharField(max_length=120)
-    password = models.CharField(max_length=60)
+    # The additional attributes we wish to include.
+    picture = models.ImageField(upload_to='profile_images', blank=True)
 
     def __str__(self):
-        '''Makes the string representation
-        equal to the first and last name of the user'''
-        return self.first_name + self.last_name
+        '''Return username of the user'''
+        return self.user.username
 
 
 class Event(models.Model):
@@ -21,7 +20,7 @@ class Event(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     modified_at = models.DateTimeField(auto_now=True, editable=False)
     address =  models.CharField(max_length=200, null=True)
-    host = models.ForeignKey('User', on_delete=models.CASCADE, null=True)
+    host = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField(null=True)
     time = models.TimeField(null=True)
     openSeats = models.IntegerField(null=True)

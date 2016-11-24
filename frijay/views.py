@@ -1,8 +1,9 @@
 '''Views for the frijay app'''
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, redirect
 from frijay.forms import UserForm, UserProfileForm
 
 
@@ -111,9 +112,13 @@ def user_login(request):
     else:
         # No context variables to pass to the template system, hence the # blank dictionary object...
         return render(request, 'frijay/login.html', {})
-            # context_dict = {'title': "Login"}
-            # return render(request, 'frijay/login.html', context_dict)
 
+@login_required
+def user_logout(request):
+    # Only logout if user is already logged in
+    logout(request)
+    # Take the user back to the homepage.
+    return HttpResponseRedirect(reverse('index'))
 
 def profile(request):
     '''user profile page view'''

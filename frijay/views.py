@@ -52,4 +52,5 @@ def events(request):
 
 def reservationsEvent(request, event_id):
     '''Reservations view for specific event'''
-    return HttpResponse("<h2>Details for event id " + str(event_id) + "</h2>")
+    context_dict = {'event_id' : event_id}
+    return render(request, 'frijay/reservationEventPage.html',context_dict)

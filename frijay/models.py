@@ -25,7 +25,7 @@ class Event(models.Model):
     date = models.DateField(null=True)
     time = models.TimeField(null=True)
     openSeats = models.IntegerField(null=True)
-    additionalDetails = models.TextField(null=True)
+    additionalDetails = models.TextField(blank=True, null=True)
 
     def __str__(self):
         '''Makes the string representation

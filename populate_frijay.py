@@ -1,6 +1,6 @@
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'shabbattable.settings')
-
+# NOTE THIS ONLY WORKS FOR DEV, NOT PROD.
 import django
 django.setup()
 from frijay.models import User, Event

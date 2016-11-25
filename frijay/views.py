@@ -135,16 +135,41 @@ def redir(request):
 
 def events(request):
     '''Event View'''
+    '''
     all_events = Event.objects.all()
     html = ''
 
     for event in all_events:
+        ttl = event.address
         url = '/frijay/events/' + str(event.id) + '/'
-        html += '<a href="' + url + '">' + event.title + '</a><br>'
+        html += '<a href="' + url + '">' + event.title + '</a><br>'    
     context_dict = {'html_list' : html}
+    return render(request, 'frijay/events.html', context_dict)
+    '''
+    ttl = ''
+    addr = ''
+    hst = ''
+    dt = ''
+    tm = ''
+    os = ''
+    all_events = Event.objects.all()
+    for x in all_events:
+        ttl += str(x.title)
+        addr += str(x.address)
+        hst += str(x.host)
+        dt += str(x.date)
+        tm += str(x.time)
+        os += str(x.openSeats)
+        
+    context_dict = {'title' : ttl,
+                    'address' : addr,
+                    'host' : hst,
+                    'date' : dt,
+                    'time' : tm,
+                    'openSeat' :os
+                    }
 
     return render(request, 'frijay/events.html', context_dict)
-
 @login_required
 def reservation(request):
     uid = request.user

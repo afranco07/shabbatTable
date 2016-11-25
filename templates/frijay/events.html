@@ -8,22 +8,22 @@
 <br>
 <h1>This is the events page</h1>
 {% autoescape off %}
-
-<div class="row">
+{% for event in html_list %}
+	<div class="row">
     <div class="col-sm-4 col-md-3">
         <div class="thumbnail">
             <img src="{% static "images/image2.jpg" %}" alt="My image" />
             <div class="caption">
-                <h3> {{title}}</h3>
-                <p>{{address}}</p>
-                <p>{{host}}</p>
-                <p>{{date}}</p>
-                <p>{{time}}</p>
-                <p>{{openSeat}}</p>
-                <p><a href="#" class="btn btn-primary" role="button">Reserve</a></p>
+                <h3>{{event.title}}</h3>
+                <p>{{event.address}}</p>
+                <p>{{event.host}}</p>
+                <p>{{event.date}}</p>
+                <p>{{event.time}}</p>
+                <p>{{event.openSeat}}</p>
+                <p>{{event.additionalDetails}}</p>
             </div>
         </div>
     </div>
-
+{% endfor %}
 {% endautoescape %}
 {% endblock %}

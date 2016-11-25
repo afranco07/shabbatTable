@@ -139,7 +139,7 @@ def reservation(request):
     uid = request.user
     userobj = User.objects.get(id=int(uid.id))
     if(request.POST.get('reserve')):
-        evnt = Event.objects.get(title="nigg")
+        evnt = Event.objects.get(title=request.POST.get('event'))
         res = Reservation.objects.get_or_create(event=evnt, guest=userobj)[0]
         res.save()
     elif(request.POST.get('cancel')):

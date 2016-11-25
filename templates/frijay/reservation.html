@@ -14,11 +14,13 @@
 {% if user.is_authenticated %}
 	<form action="#" method="POST">{% csrf_token %}
         <p>Select Event to Reserve</p>
-        <select name="event">
-            {% for event in events %}
-            <option value="{{ event.title }}">{{ event.title }}</option>
-            {% endfor %}
-        </select>
+        <label>
+            <select name="event">
+                {% for event in events %}
+                <option value="{{ event.title }}">{{ event.title }}</option>
+                {% endfor %}
+            </select>
+        </label>
         <input type="submit" value="reserve" name = "reserve">
     </form>
 

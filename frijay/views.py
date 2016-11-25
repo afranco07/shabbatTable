@@ -176,5 +176,3 @@ def reservationsEvent(request, event_id):
                     'event_details' : eventModel.additionalDetails
                     }
     return render(request, 'frijay/reservationEventPage.html',context_dict)
-    '''Reservations view for specific event'''
-    #return HttpResponse("<h2>Details for event id " + str(event_id) + "</h2>")

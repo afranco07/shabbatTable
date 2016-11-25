@@ -1,9 +1,14 @@
 '''Views for the frijay app'''
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from frijay.models import Event, Reservation
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from .models import Event
+from django.template import loader
 from frijay.forms import UserForm, UserProfileForm
 
 
@@ -18,7 +23,6 @@ def about(request):
     context_dict = {'title': "About!"}
 
     return render(request, 'frijay/about.html', context_dict)
-
 
 def signup(request):
     '''signup page view'''
@@ -130,9 +134,45 @@ def redir(request):
     return redirect('/frijay')
 
 def events(request):
-    '''Reservations View'''
-    return render(request, 'frijay/events.html')
+    '''Event View'''
+    all_events = Event.objects.all()
+    html = ''
+
+    for event in all_events:
+        url = '/frijay/events/' + str(event.id) + '/'
+        html += '<a href="' + url + '">' + event.title + '</a><br>'
+    context_dict = {'html_list' : html}
+
+    return render(request, 'frijay/events.html', context_dict)
+
+@login_required
+def reservation(request):
+    uid = request.user
+    userobj = User.objects.get(id=int(uid.id))
+    if(request.POST.get('reserve')):
+        evnt = Event.objects.get(title=request.POST.get('event'))
+        res = Reservation.objects.get_or_create(event=evnt, guest=userobj)[0]
+        res.save()
+    elif(request.POST.get('cancel')):
+        evnt = Event.objects.get(title=request.POST.get('cancel'))
+        Reservation.objects.get(event=evnt, guest=userobj).delete()
+
+    context_dict = {}
+    context_dict['events'] = Event.objects.all()
+    reservations = Reservation.objects.filter(guest=userobj)
+    context_dict['reservations'] = [x for x in reservations]
+    return render(request, 'frijay/reservation.html', context_dict)
 
 def reservationsEvent(request, event_id):
-    '''Reservations view for specific event'''
-    return HttpResponse("<h2>Details for event id " + str(event_id) + "</h2>")
+    '''Event view for specific event'''
+    eventModel = Event.objects.get(id = event_id)
+    context_dict = {'event_id' : event_id,
+                    'event_title' : eventModel.title,
+                    'event_host' : eventModel.host,
+                    'event_address' : eventModel.address,
+                    'event_date' : eventModel.date,
+                    'event_time' : eventModel.time,
+                    'event_seats' : eventModel.openSeats,
+                    'event_details' : eventModel.additionalDetails
+                    }
+    return render(request, 'frijay/reservationEventPage.html',context_dict)

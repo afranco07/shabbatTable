@@ -30,7 +30,7 @@
     <li>
         {{ x.event.title }} -- {{ x.event.date}} at {{ x.event.time }} , Host: {{ x.event.host.username }}
         <form action="#" method="POST">{% csrf_token %}
-            <button type="submit" value={{ x.event.title }} name="cancel">Cancel</button>
+            <button type="submit" value="{{ x.event.title }}" name="cancel">Cancel</button>
         </form>
     </li>
 {% endfor %}

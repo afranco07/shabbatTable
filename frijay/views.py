@@ -6,6 +6,9 @@ from frijay.models import Event, Reservation
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from .models import Event
+from django.template import loader
 from frijay.forms import UserForm, UserProfileForm
 
 
@@ -131,8 +134,16 @@ def redir(request):
     return redirect('/frijay')
 
 def events(request):
-    '''Reservations View'''
-    return render(request, 'frijay/events.html')
+    '''Event View'''
+    all_events = Event.objects.all()
+    html = ''
+
+    for event in all_events:
+        url = '/frijay/events/' + str(event.id) + '/'
+        html += '<a href="' + url + '">' + event.title + '</a><br>'
+    context_dict = {'html_list' : html}
+
+    return render(request, 'frijay/events.html', context_dict)
 
 @login_required
 def reservation(request):
@@ -153,5 +164,15 @@ def reservation(request):
     return render(request, 'frijay/reservation.html', context_dict)
 
 def reservationsEvent(request, event_id):
-    '''Reservations view for specific event'''
-    return HttpResponse("<h2>Details for event id " + str(event_id) + "</h2>")
+    '''Event view for specific event'''
+    eventModel = Event.objects.get(id = event_id)
+    context_dict = {'event_id' : event_id,
+                    'event_title' : eventModel.title,
+                    'event_host' : eventModel.host,
+                    'event_address' : eventModel.address,
+                    'event_date' : eventModel.date,
+                    'event_time' : eventModel.time,
+                    'event_seats' : eventModel.openSeats,
+                    'event_details' : eventModel.additionalDetails
+                    }
+    return render(request, 'frijay/reservationEventPage.html',context_dict)

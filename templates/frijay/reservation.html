@@ -1,0 +1,27 @@
+{% extends "frijay/base.html" %}
+{% load staticfiles %}
+
+{% block title %}Reservation{% endblock %}
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% if user.is_authenticated %}
+	<form action="#" method="POST">{% csrf_token %}
+        <input type="submit" value="reserve" name = "reserve">
+    </form>
+<ul>
+{% for x in reservations %}
+    <li>{{ x.guest.username }} -- {{ x.event.title }}</li>
+{% endfor %}
+</ul>
+{% else %}
+    <p>Please log in to reserve</p>
+{% endif %}
+
+{% endblock %}

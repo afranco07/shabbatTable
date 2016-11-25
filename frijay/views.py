@@ -1,6 +1,8 @@
 '''Views for the frijay app'''
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from frijay.models import Event, Reservation
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
@@ -18,7 +20,6 @@ def about(request):
     context_dict = {'title': "About!"}
 
     return render(request, 'frijay/about.html', context_dict)
-
 
 def signup(request):
     '''signup page view'''
@@ -132,6 +133,21 @@ def redir(request):
 def events(request):
     '''Reservations View'''
     return render(request, 'frijay/events.html')
+
+@login_required
+def reservation(request):
+    if(request.POST.get('reserve')):
+        uid = request.user
+        userobj = User.objects.get(id=int(uid.id))
+        evnt = Event.objects.get(title="nigg")
+        res = Reservation.objects.get_or_create(event=evnt, guest=userobj)[0]
+        res.save()
+    context_dict = {}
+    uid = request.user
+    userobj = User.objects.get(id=int(uid.id))
+    reservations = Reservation.objects.filter(guest=userobj)
+    context_dict['reservations'] = [x for x in reservations]
+    return render(request, 'frijay/reservation.html', context_dict)
 
 def reservationsEvent(request, event_id):
     '''Reservations view for specific event'''

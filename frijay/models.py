@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class UserProfile(models.Model):
     '''Links UserProfile to a User model instance.'''
     user = models.OneToOneField(User)
@@ -19,7 +20,7 @@ class Event(models.Model):
     title = models.CharField(max_length=80)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     modified_at = models.DateTimeField(auto_now=True, editable=False)
-    address =  models.CharField(max_length=200, null=True)
+    address = models.CharField(max_length=200, null=True)
     host = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField(null=True)
     time = models.TimeField(null=True)
@@ -30,3 +31,13 @@ class Event(models.Model):
         '''Makes the string representation
         equal to the title of the Event'''
         return self.title
+
+
+class Reservation(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    guest = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.event.name
+
+

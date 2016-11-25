@@ -1,9 +1,18 @@
 {% extends "frijay/base.html" %}
-{% block body %}
-	<h1>Frijay login</h1>
-	<div>
-	<p>Testing 1 2 3 4</p>
-	</div>
-	<p><a href="login">login</a></p>
+{% load staticfiles %}
+
+{% block title %}
+	Login
 {% endblock %}
 
+{% block body %}
+	<h1>Login to Frijay</h1>
+	<form id="login_form" method="post" action="{% url 'login' %}">
+		{% csrf_token %}
+		Username:<input type="text" name="username" value="" size="50"/>
+		<br/>
+		Password:<input type="password" name="password" value="" size="50"/>
+		<br/>
+		<input type="submit" value="submit" />
+	</form>
+{% endblock %}

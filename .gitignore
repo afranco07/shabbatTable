@@ -1,6 +1,7 @@
 *.pyc
 *.sqlite3
 .idea
+venv/
 frijay/migrations/*
 !frijay/migrations/__init__.py
 ~

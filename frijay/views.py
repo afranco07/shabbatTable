@@ -136,15 +136,18 @@ def events(request):
 
 @login_required
 def reservation(request):
+    uid = request.user
+    userobj = User.objects.get(id=int(uid.id))
     if(request.POST.get('reserve')):
-        uid = request.user
-        userobj = User.objects.get(id=int(uid.id))
         evnt = Event.objects.get(title="nigg")
         res = Reservation.objects.get_or_create(event=evnt, guest=userobj)[0]
         res.save()
+    elif(request.POST.get('cancel')):
+        evnt = Event.objects.get(title=request.POST.get('cancel'))
+        Reservation.objects.get(event=evnt, guest=userobj).delete()
+
     context_dict = {}
-    uid = request.user
-    userobj = User.objects.get(id=int(uid.id))
+    context_dict['events'] = Event.objects.all()
     reservations = Reservation.objects.filter(guest=userobj)
     context_dict['reservations'] = [x for x in reservations]
     return render(request, 'frijay/reservation.html', context_dict)

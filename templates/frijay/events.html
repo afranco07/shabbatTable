@@ -1,3 +1,8 @@
 {% extends "frijay/base.html" %}
 {% block title %}Reservations{% endblock %}
-{% block body %}<h1>This is the events page</h1>{% endblock %}
+{% block body %}
+<h1>This is the events page</h1>
+{% autoescape off %}
+<h3>{{ html_list}}</h3>
+{% endautoescape %}
+{% endblock %}

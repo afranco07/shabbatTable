@@ -1,0 +1,40 @@
+{% extends "frijay/base.html" %}
+{% load staticfiles %}
+
+{% block title %}Reservation{% endblock %}
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% if user.is_authenticated %}
+	<form action="#" method="POST">{% csrf_token %}
+        <p>Select Event to Reserve</p>
+        <select name="event">
+            {% for event in events %}
+            <option value="{{ event.title }}">{{ event.title }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="reserve" name = "reserve">
+    </form>
+
+<h4>Current Reservations:</h4>
+<ul>
+{% for x in reservations %}
+    <li>
+        {{ x.event.title }} -- {{ x.event.date}} at {{ x.event.time }} , Host: {{ x.event.host.username }}
+        <form action="#" method="POST">{% csrf_token %}
+            <button type="submit" value={{ x.event.title }} name="cancel">Cancel</button>
+        </form>
+    </li>
+{% endfor %}
+</ul>
+{% else %}
+    <p>Please log in to reserve</p>
+{% endif %}
+
+{% endblock %}

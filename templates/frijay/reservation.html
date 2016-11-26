@@ -12,7 +12,7 @@
 <ul>
 	{% for x in reservations %}
 	<li>
-		{{ x.event.title }} -- {{ x.event.date}} at {{ x.event.time }} , Host: {{ x.event.host.username }}
+		{{ x.event.title }} -- {{ x.event.date}} at {{ x.event.time }} , Host: {{ x.event.host.first_name }} {{ x.event.host.last_name }}
 		<form method="POST">{% csrf_token %}
 			<button type="submit" value="{{ x.event.title }}" name="cancel">Cancel</button>
 		</form>

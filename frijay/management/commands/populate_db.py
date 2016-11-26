@@ -69,6 +69,20 @@ class Command(BaseCommand):
                 "first_name": "Jessica",
                 "last_name": "Francisco",
                 "email": "j0b0ss@gmail.com"
+            },
+            {
+                "username": 'Tklein',
+                "password": "asterix",
+                "first_name": "Tracy",
+                "last_name": "Klein",
+                "email": "tracy.klein86@yahoo.com"
+            },
+            {
+                "username": 'talt3r',
+                "password": "bombastique",
+                "first_name": "frank",
+                "last_name": "delgado",
+                "email": "spaceys_palace@mail.com"
             }
         ]
 
@@ -96,6 +110,15 @@ class Command(BaseCommand):
                 "time": "19:00:00",
                 "openSeats": 2,
                 "additionalDetails": "Nice family dinner with the Dieplids! We'll have spots for 2 people, and have a great time! Fresh food. Guests who arrive, please bring a bottle of wine. Looking forawrd to a fun shabbat!"
+            },
+            {
+                "title": "Dinner with the Kleins",
+                "address": "15 Fort Washington Ave, Apt. 2C, New York, NY, 10032",
+                "host": User.objects.get_by_natural_key("Tklein"),
+                "date": "2016-12-19",
+                "time": "20:00:00",
+                "openSeats": 3,
+                "additionalDetails": "Good, cozy home cooked meal, games and dessert after :) All are welcome"
             }
         ]
 

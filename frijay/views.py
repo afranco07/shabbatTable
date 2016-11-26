@@ -7,9 +7,9 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Event
 from django.template import loader
 from frijay.forms import UserForm, UserProfileForm
+
 
 
 def index(request):
@@ -135,8 +135,15 @@ def redir(request):
 
 def events(request):
     '''Event View'''
-    all_events = Event.objects.all()   
+    all_events = Event.objects.all()
     context_dict = {'html_list' : all_events}
+    if(request.POST.get('reserve')):
+        uid = request.user
+        userobj = User.objects.get(id=int(uid.id))
+        evnt = Event.objects.get(title=request.POST.get('reserve'))
+        res = Reservation.objects.get_or_create(event=evnt, guest=userobj)[0]
+        res.save()
+
     return render(request, 'frijay/events.html', context_dict)
 
 @login_required
@@ -170,3 +177,4 @@ def reservationsEvent(request, event_id):
                     'event_details' : eventModel.additionalDetails
                     }
     return render(request, 'frijay/reservationEventPage.html',context_dict)
+

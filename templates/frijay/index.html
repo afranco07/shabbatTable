@@ -1,8 +1,8 @@
 {% extends 'frijay/base.html' %}
 {% load staticfiles %}
-{% block title %}
-Frijay
-{% endblock %}
+
+{% block title %}Frijay{% endblock %}
+
 {% block body %}
 <div class="jumbotron">
     {% if user.is_authenticated %}
@@ -34,7 +34,7 @@ Frijay
             </div>
         </div>
     </div>
-    <div class="col-sm-4 col-md-3">
+        <div class="col-sm-4 col-md-3">
         <div class="thumbnail">
             <img src="{% static "images/image3.jpg" %}" alt="My image" />
             <div class="caption">

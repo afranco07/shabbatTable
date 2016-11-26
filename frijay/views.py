@@ -135,14 +135,8 @@ def redir(request):
 
 def events(request):
     '''Event View'''
-    all_events = Event.objects.all()
-    html = ''
-
-    for event in all_events:
-        url = '/frijay/events/' + str(event.id) + '/'
-        html += '<a href="' + url + '">' + event.title + '</a><br>'
-    context_dict = {'html_list' : html}
-
+    all_events = Event.objects.all()   
+    context_dict = {'html_list' : all_events}
     return render(request, 'frijay/events.html', context_dict)
 
 @login_required

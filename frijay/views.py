@@ -139,7 +139,6 @@ def events(request):
     context_dict = {'html_list' : all_events}
     return render(request, 'frijay/events.html', context_dict)
 
-    return render(request, 'frijay/events.html', context_dict)
 @login_required
 def reservation(request):
     uid = request.user

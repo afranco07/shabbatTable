@@ -7,6 +7,18 @@ class Command(BaseCommand):
     args = '<foo bar ...>'
     help = 'our help string comes here'
 
+
+
+    def _clear_users(self):
+        users = User.objects.exclude(username="frijay")
+        users.delete()
+
+
+    def __clear_events(self):
+        events = Event.objects.all()
+        events.delete()
+
+
     def _populate_users(self):
         users = [
             {
@@ -43,6 +55,20 @@ class Command(BaseCommand):
                 "first_name": "Mitchall",
                 "last_name": "Wallier",
                 "email": "mitchy93@hotmail.com"
+            },
+            {
+                "username": 'Firebal',
+                "password": "FPSGGQQ77&",
+                "first_name": "Izidor",
+                "last_name": "Baum",
+                "email": "ibaum002@citymail.cuny.edu"
+            },
+            {
+                "username": 'Tsilasbury01',
+                "password": "pepperegetruckleftmountain12345",
+                "first_name": "Jessica",
+                "last_name": "Francisco",
+                "email": "j0b0ss@gmail.com"
             }
         ]
 
@@ -61,6 +87,15 @@ class Command(BaseCommand):
                 "time": "18:00:00",
                 "openSeats": 5,
                 "additionalDetails": "COME JOIN IS IT WILL BE FUN PLEASE RESREVE A SEAT COME JOIN THE SHABBAT DINNER OF 2016"
+            },
+            {
+                "title": "Shabbattable!",
+                "address": "144 00 37th Ave, Queens, NY, 11354",
+                "host": User.objects.get_by_natural_key("DBL00"),
+                "date": "2016-12-21",
+                "time": "19:00:00",
+                "openSeats": 2,
+                "additionalDetails": "Nice family dinner with the Dieplids! We'll have spots for 2 people, and have a great time! Fresh food. Guests who arrive, please bring a bottle of wine. Looking forawrd to a fun shabbat!"
             }
         ]
 
@@ -71,5 +106,11 @@ class Command(BaseCommand):
             c.save()
 
     def handle(self, *args, **options):
+        print("Clearing users...")
+        self._clear_users()
+        print("Clearing events...")
+        self.__clear_events()
+        print("Populating users...")
         self._populate_users()
+        print("Populating events...")
         self._populate_events()

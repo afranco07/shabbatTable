@@ -81,6 +81,22 @@
 
     {% block body %}
     {% endblock %}
+<hr class="featurette-divider">
+{% block footer %}
+        <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+          <div class="row">
+              &copy; 2016 Frijay, Inc. &middot;<a href="#">
+  <img src="{% static "images/twitter.png" %}" alt="Event 2" style="width:42px;height:42px;border:0;">
+</a> &nbsp <a href="#"> <img src="{% static "images/facebook.png" %}" alt="Event 2" style="width:42px;height:42px;border:0;">
+</a> &nbsp <a href="#"> <img src="{% static "images/instagram.png" %}" alt="Event 2" style="width:42px;height:42px;border:0;">
+</a> </div>
+      </div>
+    <br>
+    </footer>
+{% endblock %}
+
 
 </body>
 </html>

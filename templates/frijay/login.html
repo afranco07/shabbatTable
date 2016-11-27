@@ -6,6 +6,9 @@
 {% endblock %}
 
 {% block body %}
+	<br />
+	<br />
+
 	<h1>Login to Frijay</h1>
 	<form id="login_form" method="post" action="{% url 'login' %}">
 		{% csrf_token %}

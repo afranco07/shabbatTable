@@ -2,11 +2,15 @@
 {% load staticfiles %}
 
 {% block title %}
-	Register
+	HelloRegister
 {% endblock %}
 
 {% block body %}
-	<h1>Registration Page</h1>
+	<br />
+	<br />
+
+	<h1>Sign up with Frijay</h1>
+
 	{% if registered %}
 		<strong>thank you for registering!</strong>
 		<a href="{% url 'index' %}">Return to the homepage.</a><br />

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title> Host a Dinner </title>
+</head>
+
+{% extends "frijay/base.html" %}
+{% load staticfiles %}
+{% block body %}
+<br />
+<br />
+<h1>Host A Dinner</h1>
+
+<form id="event_form" action="{% url 'host' %}" method="post">
+    {% csrf_token %}
+
+
+    {% for field in event_form %}
+            {{ field.errors }}<br/>
+            {{ field.label }}<br/>
+            {{ field }}<br />
+    {% endfor %}
+
+    <!-- Provide a button to click to submit the form. -->
+    <input type="submit" name="submit" value="Host Dinner">
+</form>
+{% endblock %}
+</html>

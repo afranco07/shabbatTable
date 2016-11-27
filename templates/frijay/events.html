@@ -1,25 +1,39 @@
 {% extends "frijay/base.html" %}
 {% load staticfiles %}
+{% load reserv_exists %}
 
 
 {% block title %}Events Page{% endblock %}
 {% block body %}
 <br>
 <br>
-<h1>This is the events page</h1>
+<h1>Events</h1>
 {% autoescape off %}
 {% for event in html_list %}
     <div class="col-sm-4 col-md-3">
         <div class="thumbnail">
             <img src="{% static "images/image2.jpg" %}" alt="My image" />
             <div class="caption">
-                <h3>{{event.title}}</h3>
+                <div class="well well-sm">
+                    <h3>{{event.title}}</h3>
+                </div>
                 <p>{{event.address}}</p>
                 <p>{{event.host}}</p>
                 <p>{{event.date}}</p>
                 <p>{{event.time}}</p>
                 <p>{{event.openSeat}}</p>
                 <p>{{event.additionalDetails}}</p>
+
+                {% if user.is_authenticated %}
+                    {% reservation_exists user event as exists %}
+                    {% if exists is False %}
+                    <form method="POST">{% csrf_token %}
+                        <button type="submit" class="btn btn-primary" value="{{event.title}}" name = "reserve">Reserve a Seat</button>
+                    </form>
+                    {% else %}
+                    <a style="text-decoration: none;" href="{% url 'reservation' %}"><span class="label label-success">Reserved</span></a>
+                    {% endif %}
+                {% endif %}
             </div>
         </div>
     </div>

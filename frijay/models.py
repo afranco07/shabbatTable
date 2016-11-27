@@ -17,7 +17,7 @@ class UserProfile(models.Model):
 
 class Event(models.Model):
     '''A model for event attended by users'''
-    title = models.CharField(max_length=80)
+    title = models.CharField(max_length=80, unique=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     modified_at = models.DateTimeField(auto_now=True, editable=False)
     address = models.CharField(max_length=200, null=True)

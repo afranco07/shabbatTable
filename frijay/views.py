@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from frijay.forms import UserForm, UserProfileForm
+from frijay.forms import UserForm, UserProfileForm, EventForm
 
 
 
@@ -88,17 +88,11 @@ def user_login(request):
     '''login page view'''
     if request.method == 'POST':
         # Gather the username and password provided by the user.
-        # This information is obtained from the login form.
-        # We use request.POST.get('<variable>') as opposed
-        # to request.POST['<variable>'], because the
-        # request.POST.get('<variable>') returns None if the
-        # value does not exist, while request.POST['<variable>'] # will raise a KeyError exception.
         username = request.POST.get('username')
         password = request.POST.get('password')
-        # Use Django's machinery to attempt to see if the username/password # combination is valid - a User object is returned if it is.
+        # Make a User object with Django's machinery
         user = authenticate(username=username, password=password)
         # If we have a User object, the details are correct.
-        # If None, no user # with matching credentials was found.
         if user:
             # Is the account active? It could have been disabled.
             if user.is_active:
@@ -108,6 +102,8 @@ def user_login(request):
             else:
             # An inactive account was used - no logging in!
                 return HttpResponse("Your account is disabled.")
+
+        # No user # with matching credentials was found.
         else:
             # Bad login details were provided. So we can't log the user in.
             print("Invalid login details: {0}, {1}".format(username, password))
@@ -147,6 +143,24 @@ def events(request):
     return render(request, 'frijay/events.html', context_dict)
 
 @login_required
+def host_event(request):
+    uid = request.user
+    userObj = User.objects.get(id=int(uid.id))
+    if request.method == 'POST':
+        event_form = EventForm(data=request.POST)
+
+        if event_form.is_valid():
+            event = event_form.save()
+            event.save()
+        else:
+            # invalid form or forms TODO
+            print(event.errors)
+    else:
+        event_form = EventForm()
+    return render(request, 'frijay/host.html', {'event_form': event_form})
+
+
+@login_required
 def reservation(request):
     uid = request.user
     userobj = User.objects.get(id=int(uid.id))
@@ -177,4 +191,3 @@ def reservationsEvent(request, event_id):
                     'event_details' : eventModel.additionalDetails
                     }
     return render(request, 'frijay/reservationEventPage.html',context_dict)
-

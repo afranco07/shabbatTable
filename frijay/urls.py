@@ -14,5 +14,6 @@ urlpatterns = [
     #temp\/
     url(r'^reservations/', views.reservation, name='reservation'),
     #specific reservation view
-    url(r'^events/(?P<event_id>[0-9]+)/$', views.reservationsEvent, name='reservationsEvent'),
+    # url(r'^events/(?P<event_id>[0-9]+)/$', views.reservationsEvent, name='reservationsEvent'),
+    url(r'^host/', views.host_event, name='host'),
 ]

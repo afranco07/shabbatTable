@@ -11,3 +11,4 @@ pylint==1.6.4
 six==1.10.0
 whitenoise==3.2.2
 wrapt==1.10.8
+coverage==3.6

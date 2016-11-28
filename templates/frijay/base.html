@@ -45,7 +45,7 @@
             </form>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="{% url 'host' %}">Host a Dinner<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{% url 'host' %}">Host a Dinner</a></li>
                     <li><a href="{% url 'reservation' %}">Reservations</a></li>
                     <li><a href="{% url 'events' %}">Events</a></li>
                 </ul>
@@ -81,6 +81,22 @@
 
     {% block body %}
     {% endblock %}
+<hr class="featurette-divider">
+{% block footer %}
+        <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+          <div class="row">
+              &copy; 2016 Frijay, Inc. &middot;<a href="#">
+  <img src="{% static "images/twitter.png" %}" alt="Event 2" style="width:42px;height:42px;border:0;">
+</a> &nbsp <a href="#"> <img src="{% static "images/facebook.png" %}" alt="Event 2" style="width:42px;height:42px;border:0;">
+</a> &nbsp <a href="#"> <img src="{% static "images/instagram.png" %}" alt="Event 2" style="width:42px;height:42px;border:0;">
+</a> </div>
+      </div>
+    <br>
+    </footer>
+{% endblock %}
+
 
 </body>
 </html>

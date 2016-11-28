@@ -16,4 +16,10 @@ class UserModelTest(TestCase):
     def test_string_representation(self):
         '''Test __str__ method for User'''
         user = User(first_name='Abraham',last_name='Lincoln')
-        self.assertEqual(str(user), user.first_name+user.last_name)
+        self.assertEqual(str(user), user.first_name)
+
+class viewsTest(TestCase):
+    '''Test the index.html page'''
+    def test_indexPage(self):
+        response = self.client.get("/frijay/")
+        self.assertEqual(response.status_code, 200)

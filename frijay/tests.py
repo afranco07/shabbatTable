@@ -44,3 +44,8 @@ class viewsTest(TestCase):
     def test_loginPage(self):
         response = self.client.get("/frijay/login")
         self.assertEqual(response.status_code, 200)
+
+    '''Test the signup.html'''
+    def test_signUpPage(self):
+        response = self.client.get("/frijay/signup/")
+        self.assertEqual(response.status_code, 200)

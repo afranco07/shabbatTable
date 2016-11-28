@@ -29,3 +29,8 @@ class viewsTest(TestCase):
     def test_reservationPage(self):
         response = self.client.get("/frijay/reservations/")
         self.assertEqual(response.status_code, 200)
+
+    '''Test the events.html page'''
+    def test_eventsPage(self):
+        response = self.client.get("/frijay/events/")
+        self.assertEqual(response.status_code, 200)

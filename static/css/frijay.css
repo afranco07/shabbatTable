@@ -42,3 +42,7 @@ input[type=text]:focus {
 .h1-font{
     font-family: 'Raleway',sans-serif;
 }
+.panel-body{
+    background-color: #e6e6e6;
+    box-shadow: 10px 10px #b3b3b3;
+}

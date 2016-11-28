@@ -6,23 +6,40 @@
 {% endblock %}
 
 {% block body %}
-<link href="http://v4-alpha.getbootstrap.com/examples/signin/signin.css"
-rel="stylesheet">
 <div class="jumbotron">
 	<h1 class="display-3"> Login</h1>
 </div>
+<div class="container">
+        <div class="row">
+            <h1 class="h1-font" style="text-align: center">Please Sign In</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+                <div class="panel panel-warning">
+                  <div class="panel-body">
+                <form class="form-signin" role="form" method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_username">Username: </label>
+                        <input type="text" name="username" id="id_username" class="form-control"
+                        placeholder="Username" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password">Password: </label>
+                        <input type="password" name="password" id="id_password" class="form-control"
+                        placeholder="Password" required>
+                    </div>
+                    <button class="btn btn-lg btn-default btn-block" type="submit"
+                        value="Submit">Sign in</button>
+                    <p>New User? <a href="{% url 'signup' %}" style="text-decoration: none">Sign Up</a></p>
+                </form>
+                       </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<form class="form-signin" role="form" method="post" action="{% url 'login' %}">
-{% csrf_token %}
-	<h2 class="form-signin-heading">Please sign in</h2>
-	<label for="inputUsername" class="sr-only">Username</label>
-	<input type="text" name="username" id="id_username" class="form-control"
-	placeholder="Username" required autofocus>
-	<label for="inputPassword" class="sr-only">Password</label>
-	<input type="password" name="password" id="id_password" class="form-control"
-	placeholder="Password" required>
-	<button class="btn btn-lg btn-primary btn-block" type="submit"
-	value="Submit" />Sign in</button>
-</form>
 
 {% endblock %}

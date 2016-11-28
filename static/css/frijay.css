@@ -23,18 +23,6 @@
 .caption{
     text-align: center;
 }
-.row h1{
-    text-align: center;
-}
-.form-group{
-    align-items:center;
-}
-.form-group input[type=text] {
-    text-align: center;
-    width: 130px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
 
 input[type=text]:focus {
     width: 100%;
@@ -50,4 +38,11 @@ input[type=text]:focus {
     text-align: center;
     font-family: 'Quicksand', sans-serif;
     font-size: 19px;
+}
+.h1-font{
+    font-family: 'Raleway',sans-serif;
+}
+.panel-body{
+    background-color: #e6e6e6;
+    box-shadow: 10px 10px #b3b3b3;
 }

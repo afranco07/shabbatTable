@@ -19,7 +19,13 @@ class UserModelTest(TestCase):
         self.assertEqual(str(user), user.first_name)
 
 class viewsTest(TestCase):
+
     '''Test the index.html page'''
     def test_indexPage(self):
         response = self.client.get("/frijay/")
+        self.assertEqual(response.status_code, 200)
+
+    '''Test the reservation.html page'''
+    def test_reservationPage(self):
+        response = self.client.get("/frijay/reservations/")
         self.assertEqual(response.status_code, 200)

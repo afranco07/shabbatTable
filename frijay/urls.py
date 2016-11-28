@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^profile/', views.profile, name='profile'),
     #reservations page
     url(r'^events/$', views.events, name='events'),
+    url(r'^myevents/$', views.myevents, name='myevents'),
     #temp\/
     url(r'^reservations/', views.reservation, name='reservation'),
     #specific reservation view

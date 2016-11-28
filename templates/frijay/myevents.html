@@ -1,0 +1,33 @@
+{% extends "frijay/base.html" %}
+{% load staticfiles %}
+
+
+{% block title %}My Events{% endblock %}
+{% block body %}
+<br>
+<br>
+<h1>My Events</h1>
+{% autoescape off %}
+<div style="display:inline-block;">
+    {% for event in event_list %}
+        <div class="col-sm-4 col-md-3">
+            <div class="thumbnail">
+                <img src="{% static "images/image2.jpg" %}" alt="My image" />
+                <div class="caption">
+                    <div class="well well-sm">
+                        <h3>{{event.title}}</h3>
+                    </div>
+                    <p>{{event.date}}</p>
+                    <p>{{event.time}}</p>
+                    <form method="POST">{% csrf_token %}
+                        <button type="submit" class="btn btn-primary" value="{{event.title}}" name = "reserve">Reserve a Seat</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+    <p>You are currently not a host of any dinner. If you wish to host an event, please go to <a href="{% url 'host' %}">Make an Event</a>.</p>
+    {% endfor %}
+</div>
+{% endautoescape %}
+{% endblock %}

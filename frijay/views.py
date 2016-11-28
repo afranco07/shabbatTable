@@ -178,6 +178,14 @@ def reservation(request):
     context_dict['reservations'] = [x for x in reservations]
     return render(request, 'frijay/reservation.html', context_dict)
 
+@login_required
+def myevents(request):
+    context_dict = {}
+    uid = request.user
+    user = User.objects.get(id=int(uid.id))
+    context_dict['event_list'] = [x for x in Event.objects.all() if x.host == user]
+    return render(request, 'frijay/myevents.html', context_dict)
+
 def reservationsEvent(request, event_id):
     '''Event view for specific event'''
     eventModel = Event.objects.get(id = event_id)

@@ -23,9 +23,6 @@
 .caption{
     text-align: center;
 }
-.row h1{
-    text-align: center;
-}
 
 input[type=text]:focus {
     width: 100%;

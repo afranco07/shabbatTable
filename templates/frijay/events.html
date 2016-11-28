@@ -9,6 +9,7 @@
 <br>
 <h1>Events</h1>
 {% autoescape off %}
+<div style="display:inline-block;">
 {% for event in html_list %}
     <div class="col-sm-4 col-md-3">
         <div class="thumbnail">
@@ -31,12 +32,15 @@
                         <button type="submit" class="btn btn-primary" value="{{event.title}}" name = "reserve">Reserve a Seat</button>
                     </form>
                     {% else %}
-                    <a style="text-decoration: none;" href="{% url 'reservation' %}"><span class="label label-success">Reserved</span></a>
+                    <a style="text-decoration: none;" href="{% url 'reservation' %}"><span class="label label-success">RSVP</span></a>
                     {% endif %}
+                {% else %}
+                    <a href="{% url 'login' %}?next=/frijay/events/", class="btn btn-primary">RSVP</a>
                 {% endif %}
             </div>
         </div>
     </div>
 {% endfor %}
+</div>
 {% endautoescape %}
 {% endblock %}

@@ -6,10 +6,35 @@ from frijay.models import UserProfile, Event
 
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+    """ Registration Form to register a new User """
+    first_name = forms.CharField(label="First Name", required=True)
+    last_name = forms.CharField(label="Last Name", required=True)
+    username = forms.RegexField(
+        label = "Username",
+        max_length=30,
+        regex=r'^[\w]+$',
+        required=True,
+        error_messages={'invalid':
+                        "This value may contain only letters, numbers and _ characters."})
+    email = forms.EmailField(
+        label=("Email address"),
+        widget=forms.TextInput(attrs=dict(unique=True,                                                            required=True,
+                                          max_length=30)))
+    password = forms.CharField(
+        label=("PASSWORD *"),
+        widget=forms.PasswordInput(attrs=dict(required=True,
+                                              max_length=30,
+                                              render_value=False)))
     class Meta:
         model = User
-        fields = ('username', 'email', 'password')
+        fields = ('first_name', 'last_name', 'username', 'email', 'password')
+
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        if User.objects.filter(email=data).exists():
+            raise forms.ValidationError("This email is already used.")
+        return data
+
 
 class UserProfileForm(forms.ModelForm):
     class Meta:

@@ -13,7 +13,7 @@ class EventModelTest(TestCase):
         self.assertEqual(str(event), event.title)
 
 class UserModelTest(TestCase):
-    
+
     '''Testing the User Model'''
     def test_string_representation(self):
         '''Test __str__ method for User'''

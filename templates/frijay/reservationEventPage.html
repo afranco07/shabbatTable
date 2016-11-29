@@ -1,0 +1,11 @@
+{% extends "frijay/base.html" %}
+{% block title %}Reservations{% endblock %}
+{% block body %}
+<h1>This is the events id : {{ event_id }}</h1>
+Title : {{ event_title }}<br>
+Host Name : {{ event_host }}<br>
+Address : {{ event_address }}<br>
+Date : {{ event_date }} {{ event_time }}<br>
+Number of Open Seats : {{ event_seats }}<br>
+Additional Details : {{ event_details }}<br>
+{% endblock %}

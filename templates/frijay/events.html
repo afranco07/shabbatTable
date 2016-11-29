@@ -32,7 +32,7 @@
                         <button type="submit" class="btn btn-primary" value="{{event.title}}" name = "reserve">Reserve a Seat</button>
                     </form>
                     {% else %}
-                    <a style="text-decoration: none;" href="{% url 'reservation' %}"><span class="label label-success">RSVP</span></a>
+                    <a style="text-decoration: none;" href="{% url 'reservation' %}"><span class="label label-success">Request Sent - Waiting for Approval</span></a>
                     {% endif %}
                 {% else %}
                     <a href="{% url 'login' %}?next=/frijay/events/", class="btn btn-primary">RSVP</a>

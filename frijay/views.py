@@ -180,6 +180,8 @@ def reservation(request):
 
 @login_required
 def myevents(request):
+    if(request.POST.get('cancel')):
+        Event.objects.get(title=request.POST.get('cancel')).delete()
     context_dict = {}
     uid = request.user
     user = User.objects.get(id=int(uid.id))
@@ -187,6 +189,7 @@ def myevents(request):
     guests = Reservation.objects.filter(event__in=context_dict['event_list'])
     context_dict['guests_u'] = [x.guest for x in guests if not x.accept]
     context_dict['guests_a'] = [x.guest for x in guests if x.accept]
+
     return render(request, 'frijay/myevents.html', context_dict)
 
 

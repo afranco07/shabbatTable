@@ -20,20 +20,26 @@
                     <p>{{event.date}}</p>
                     <p>{{event.time}}</p>
                     <form method="POST">{% csrf_token %}
-                        <button type="submit" class="btn btn-primary" value="{{event.title}}" name = "reserve">Reserve a Seat</button>
+                        <button type="submit" class="btn btn-primary" value="{{event.title}}" name = "cancel">Cancel Dinner</button>
                     </form>
                     <hr>
                     <h5><b>Pending Reservations</b></h5>
                     {% for guest in guests_u %}
-                    <li>{{ guest.first_name }} {{ guest.last_name }} - {{ guest.email }} |Unapproved</li>
+                    <li>{{ guest.first_name }} {{ guest.last_name }} - {{ guest.email }}<br>
+                        <form method="POST">{% csrf_token %}
+                        <button type="submit" class="label label-success" value="{{ guest.username }}" name = "approve">Approve Request</button>
+                        <button type="submit" class="label label-warning" value="{{ guest.username }}" name = "decline">Decline Request</button>
+                        </form>
+                    </li>
                     {% empty %}
                     <p><i>No pending reservation requests</i></p>
                     {% endfor %}
                         <hr>
                     <h5><b>Approved Reservations</b></h5>
                     {% for guest in guests_a %}
+                    <li>{{ guest.first_name }} {{ guest.last_name }} - {{ guest.email }}</li>
                     {% empty %}
-                    <p><i>No accepted guests yet<i/></p>
+                    <p><i>No accepted guests yet</i></p>
                     {% endfor %}
                 </div>
             </div>

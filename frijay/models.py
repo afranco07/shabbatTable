@@ -36,7 +36,7 @@ class Event(models.Model):
 class Reservation(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     guest = models.ForeignKey(User, on_delete=models.CASCADE)
-    accept = models.BooleanField(null=False, default=False)
+    accept = models.NullBooleanField(null=True, default=None)
 
     def __str__(self):
         return self.event.name

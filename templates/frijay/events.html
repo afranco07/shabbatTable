@@ -15,7 +15,8 @@
             <img src="{% static "images/image2.jpg" %}" alt="My image" />
             <div class="caption">
                 <div class="well well-sm">
-                    <h3>{{event.title}}</h3>
+                    
+                    <a href="/frijay/events/{{event.id}}"><h3>{{event.title}}</h3></a>
                 </div>
                 <p>{{event.address}}</p>
                 <p>{{event.host}}</p>
@@ -37,6 +38,9 @@
             </div>
         </div>
     </div>
+
 {% endfor %}
+     <div style="clear:both"></div>    
+
 {% endautoescape %}
 {% endblock %}

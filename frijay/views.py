@@ -189,6 +189,7 @@ def myevents(request):
     context_dict['guests_a'] = [x.guest for x in guests if x.accept]
     return render(request, 'frijay/myevents.html', context_dict)
 
+
 def reservationsEvent(request, event_id):
     '''Event view for specific event'''
     eventModel = Event.objects.get(id = event_id)

@@ -22,15 +22,20 @@
                     <form method="POST">{% csrf_token %}
                         <button type="submit" class="btn btn-primary" value="{{event.title}}" name = "reserve">Reserve a Seat</button>
                     </form>
+                    <hr>
+                    <h5><b>Pending Reservations</b></h5>
+                    {% for guest in guests_u %}
+                    <li>{{ guest.first_name }} {{ guest.last_name }} - {{ guest.email }} |Unapproved</li>
+                    {% empty %}
+                    <p><i>No pending reservation requests</i></p>
+                    {% endfor %}
+                        <hr>
+                    <h5><b>Approved Reservations</b></h5>
+                    {% for guest in guests_a %}
+                    {% empty %}
+                    <p><i>No accepted guests yet<i/></p>
+                    {% endfor %}
                 </div>
-                {% for guest in guests_u %}
-                {% empty %}
-                <p>No pending reservation requests</p>
-                {% endfor %}
-                {% for guest in guests_a %}
-                {% empty %}
-                <p>No accepted guests yet</p>
-                {% endfor %}
             </div>
         </div>
     {% empty %}

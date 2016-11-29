@@ -184,6 +184,9 @@ def myevents(request):
     uid = request.user
     user = User.objects.get(id=int(uid.id))
     context_dict['event_list'] = [x for x in Event.objects.all() if x.host == user]
+    guests = Reservation.objects.filter(event__in=context_dict['event_list'])
+    context_dict['guests_u'] = [x.guest for x in guests if not x.accept]
+    context_dict['guests_a'] = [x.guest for x in guests if x.accept]
     return render(request, 'frijay/myevents.html', context_dict)
 
 def reservationsEvent(request, event_id):

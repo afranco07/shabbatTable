@@ -23,6 +23,14 @@
                         <button type="submit" class="btn btn-primary" value="{{event.title}}" name = "reserve">Reserve a Seat</button>
                     </form>
                 </div>
+                {% for guest in guests_u %}
+                {% empty %}
+                <p>No pending reservation requests</p>
+                {% endfor %}
+                {% for guest in guests_a %}
+                {% empty %}
+                <p>No accepted guests yet</p>
+                {% endfor %}
             </div>
         </div>
     {% empty %}

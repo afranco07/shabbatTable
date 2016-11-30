@@ -9,7 +9,6 @@
 <br>
 <h1>Events</h1>
 {% autoescape off %}
-<div style="display:inline-block;">
 {% for event in html_list %}
     <div class="col-sm-4 col-md-3">
         <div class="thumbnail">
@@ -35,7 +34,7 @@
         </div>
     </div>
 {% endfor %}
+
 <div style="clear:both;"></div>
-</div>
 {% endautoescape %}
 {% endblock %}

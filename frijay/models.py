@@ -22,16 +22,17 @@ class Event(models.Model):
     modified_at = models.DateTimeField(auto_now=True, editable=False)
     # Street Address, Line 1, required
     address = models.CharField("Street Address", max_length=40)
-    address2 = models.CharField("Apt/Floor", max_length=40, null=True)
-    city = models.CharField(max_length=200)
-    state = models.CharField(max_length=20)
+    address2 = models.CharField("Apt / Floor", max_length=40, null=True)
+    city = models.CharField("City", max_length=200)
+    state = models.CharField("State", max_length=20)
     zipcode = models.CharField("ZIP code", max_length=5)
     host = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    phone = models.IntegerField("Phone")
     date = models.DateField("Date")
-    time1 = models.TimeField("From")
-    time2 = models.TimeField("Till")
-    openSeats = models.IntegerField("Number of Seats Open")
-    additionalDetails = models.TextField("Additional Details",
+    time1 = models.TimeField("Starting at")
+    time2 = models.TimeField("Ending at")
+    openSeats = models.IntegerField("Available Seats")
+    additionalDetails = models.TextField("Details",
                                          blank=True,
                                          null=True)
 

@@ -188,7 +188,7 @@ def reservationsEvent(request, event_id):
                     'event_host' : eventModel.host,
                     'event_address' : eventModel.address,
                     'event_date' : eventModel.date,
-                    'event_time' : eventModel.time,
+                    'event_time' : eventModel.time1,
                     'event_seats' : eventModel.openSeats,
                     'event_details' : eventModel.additionalDetails
                     }

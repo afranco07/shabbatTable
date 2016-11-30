@@ -22,7 +22,7 @@ class Command(BaseCommand):
     def _populate_users(self):
         users = [
             {
-                "username": 'jonathanrozario',
+                "username": 'jonathanrozario', # user for debugging
                 "password": "qwerty",
                 "first_name": "Jonathan",
                 "last_name": "Rozario",

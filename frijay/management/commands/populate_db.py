@@ -22,6 +22,13 @@ class Command(BaseCommand):
     def _populate_users(self):
         users = [
             {
+                "username": 'jonathanrozario', # user for debugging
+                "password": "qwerty",
+                "first_name": "Jonathan",
+                "last_name": "Rozario",
+                "email": "jonathanrozario@gmail.com"
+            },
+            {
                 "username": 'Jack698',
                 "password": "A4B2N6",
                 "first_name": "Jack",
@@ -87,45 +94,91 @@ class Command(BaseCommand):
         ]
 
         for u in users:
-            usr = User.objects.create_user(u['username'], u['email'], u['password'], first_name=u['first_name'],
-                                           last_name=u['last_name'])
+            usr = User.objects.create_user(
+                u['username'],
+                u['email'],
+                u['password'],
+                first_name=u['first_name'], last_name=u['last_name'])
             usr.save()
 
     def _populate_events(self):
         events = [
             {
                 "title": "Friday Shabbat in Brooklyn",
-                "address": "633 E 89th St, Brooklyn, NY 11236",
+                "address": "633 E 89th St",
+                "address2": "Floor 3",
+                "city": "Brooklyn",
+                "state": "NY",
+                "zipcode": "11236",
                 "host": User.objects.get_by_natural_key("Mitchy93"),
+                "phone": "2120008888",
                 "date": "2016-12-14",
-                "time": "18:00:00",
+                "time1": "18:00:00",
+                "time2": "20:00:00",
                 "openSeats": 5,
                 "additionalDetails": "COME JOIN IS IT WILL BE FUN PLEASE RESREVE A SEAT COME JOIN THE SHABBAT DINNER OF 2016"
             },
             {
                 "title": "Shabbattable!",
-                "address": "144 00 37th Ave, Queens, NY, 11354",
+                "address": "144 00 37th Ave",
+                "address2": "Apt. 4D",
+                "city": "Queens",
+                "state": "NY",
+                "zipcode": "11354",
                 "host": User.objects.get_by_natural_key("DBL00"),
+                "phone": "2120009999",
                 "date": "2016-12-21",
-                "time": "19:00:00",
+                "time1": "19:00:00",
+                "time2": "21:00:00",
                 "openSeats": 2,
                 "additionalDetails": "Nice family dinner with the Dieplids! We'll have spots for 2 people, and have a great time! Fresh food. Guests who arrive, please bring a bottle of wine. Looking forawrd to a fun shabbat!"
             },
             {
                 "title": "Dinner with the Kleins",
-                "address": "15 Fort Washington Ave, Apt. 2C, New York, NY, 10032",
+                "address": "15 Fort Washington Ave",
+                "address2": "Apt. 2C",
+                "city": "New York",
+                "state": "NY",
+                "zipcode": "10032",
                 "host": User.objects.get_by_natural_key("Tklein"),
+                "phone": "2120001111",
                 "date": "2016-12-19",
-                "time": "20:00:00",
+                "time1": "20:00:00",
+                "time2": "22:00:00",
                 "openSeats": 3,
                 "additionalDetails": "Good, cozy home cooked meal, games and dessert after :) All are welcome"
+            },
+            {
+                "title": "Dinner with my peeps",
+                "address": "225 George Washington Bridge",
+                "address2": "Floor 0.5",
+                "city": "Inwood",
+                "state": "NY",
+                "zipcode": "10045",
+                "host": User.objects.get_by_natural_key("Tklein"),
+                "phone": "2127771111",
+                "date": "2016-12-29",
+                "time1": "18:00:00",
+                "time2": "22:00:00",
+                "openSeats": 3,
+                "additionalDetails": "Let's have shabbat!"
             }
         ]
 
         for e in events:
-            c = Event.objects.get_or_create(title=e['title'], address=e['address'], host=e['host'], date=e['date'],
-                                            time=e['time'], openSeats=e['openSeats'],
-                                            additionalDetails=e['additionalDetails'])[0]
+            c = Event.objects.get_or_create(
+                title=e['title'],
+                address=e['address'],
+                address2=e['address2'],
+                city=e['city'],
+                state=e['state'],
+                zipcode=e['zipcode'],
+                host=e['host'],
+                phone=e['phone'],
+                date=e['date'],
+                time1=e['time1'],
+                time2=e['time2'], openSeats=e['openSeats'],
+                additionalDetails=e['additionalDetails'])[0]
             c.save()
 
     def handle(self, *args, **options):

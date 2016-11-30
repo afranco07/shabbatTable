@@ -11,6 +11,7 @@ from django.template import loader
 from frijay.forms import UserForm, UserProfileForm, EventForm
 
 
+
 def index(request):
     '''index page view'''
     context_dict = {'title': "Frijay!"}
@@ -22,7 +23,6 @@ def about(request):
     context_dict = {'title': "About!"}
 
     return render(request, 'frijay/about.html', context_dict)
-
 
 def signup(request):
     '''signup page view'''
@@ -155,8 +155,10 @@ def host_event(request):
         event_form = EventForm(data=request.POST)
 
         if event_form.is_valid():
-            event = event_form.save()
+            event = event_form.save(commit=False)
+            event.host = userObj
             event.save()
+            return HttpResponseRedirect(reverse('myevents'))
         else:
             # invalid form or forms TODO
             print(event.errors)
@@ -217,14 +219,15 @@ def myevents(request):
 
 def reservationsEvent(request, event_id):
     '''Event view for specific event'''
-    eventModel = Event.objects.get(id=event_id)
-    context_dict = {'event_id': event_id,
-                    'event_title': eventModel.title,
-                    'event_host': eventModel.host.first_name,
-                    'event_address': eventModel.address,
-                    'event_date': eventModel.date,
-                    'event_time': eventModel.time,
-                    'event_seats': eventModel.openSeats,
-                    'event_details': eventModel.additionalDetails
+    eventModel = Event.objects.get(id = event_id)
+    context_dict = {'event_id' : event_id,
+                    'event_title' : eventModel.title,
+                    'event_host' : eventModel.host.first_name,
+                    'event_city' : eventModel.city,
+                    'event_date' : eventModel.date,
+                    'event_timefrom' : eventModel.time1,
+                    'event_timeto' : eventModel.time2,
+                    'event_seats' : eventModel.openSeats,
+                    'event_details' : eventModel.additionalDetails
                     }
-    return render(request, 'frijay/reservationEventPage.html', context_dict)
+    return render(request, 'frijay/reservationEventPage.html',context_dict)

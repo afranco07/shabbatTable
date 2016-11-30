@@ -9,9 +9,6 @@
 <br>
 <h1>Events</h1>
 {% autoescape off %}
-<div class="container">
-
-
 {% for event in html_list %}
     <div class="col-sm-4 col-md-3">
         <div class="thumbnail">
@@ -20,13 +17,6 @@
                 <div class="well well-sm">
                     <a href="/frijay/events/{{event.id}}"><h3>{{event.title}}</h3></a>
                 </div>
-                <p>{{event.city}}</p>
-                <p>{{event.host.first_name}}</p>
-                <p><strong>On: </strong>{{event.date}}</p>
-                <p><strong>From: </strong> {{event.time1}} </p>
-                <p><strong>To: </strong> {{event.time2}} </p>
-                <p>{{event.openSeat}}</p>
-                <p>{{event.additionalDetails}}</p>
 
                 {% if user.is_authenticated %}
                     {% reservation_exists user event as exists %}
@@ -43,7 +33,6 @@
     </div>
 
 {% endfor %}
-</div>
      <div style="clear:both"></div>
 
 {% endautoescape %}

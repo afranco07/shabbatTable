@@ -150,7 +150,8 @@ def host_event(request):
         event_form = EventForm(data=request.POST)
 
         if event_form.is_valid():
-            event = event_form.save()
+            event = event_form.save(commit=False)
+            event.host = request.user
             event.save()
         else:
             # invalid form or forms TODO

@@ -51,7 +51,6 @@
                 <ul class="nav navbar-nav">
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'host' %}">Host a Dinner</a></li>
-                    {% if user.is_authenticated %}
                     <li><a href="{% url 'reservation' %}">Dinners I'm Going To</a></li>
                     <li><a href="{% url 'myevents' %}">Dinners I'm Hosting</a></li>
                     {% endif %}

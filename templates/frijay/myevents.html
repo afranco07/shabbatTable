@@ -20,7 +20,7 @@
                     <p>{{container.event.date}}</p>
                     <p>{{container.event.time}}</p>
                     <form method="POST">{% csrf_token %}
-                        <button type="submit" class="btn btn-primary" value="{{event.title}}" name = "cancel">Cancel Dinner</button>
+                        <button type="submit" class="btn btn-primary" value="{{container.event.title}}" name = "cancel">Cancel Dinner</button>
                     </form>
                     <hr>
                     <h5><b>Pending Reservations</b></h5>

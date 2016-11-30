@@ -55,24 +55,42 @@ class UserProfileForm(forms.ModelForm):
 
 class EventForm(forms.ModelForm):
     """ Form to Host a Dinner """
+    # title = forms.CharField(required=True,
+    #                         max_length=128,
+    #                         help_text="Please enter a title.")
     title = forms.CharField(
-        max_length=128, help_text="Please enter a title.")
-    address = forms.CharField(
-        max_length=160, help_text="Please enter the address.")
-    # host = forms.CharField(widget=forms.HiddenInput())
+        widget=forms.TextInput(attrs={'required':True, 'max_length':30}))
+    # Street Address, Line 1
+    address = forms.CharField(required=True,
+                              max_length=160,
+                              help_text="Please enter the address.")
+    # Street Address, Line 2
+    address2 = forms.CharField(max_length=40)
+    city = forms.CharField(required=True, max_length=15)
+    state = forms.CharField(required=True, max_length=15)
+    zipcode = forms.IntegerField(min_value=0, max_value=99999)
+    phone = forms.IntegerField(min_value=0, max_value=9999999)
     date = forms.DateField(initial=datetime.today().date() + timedelta(days=7))
-    time = forms.TimeField(initial=datetime.now().time())
+    # Starting time
+    time1 = forms.TimeField(initial=datetime.now().time())
+    # Ending time
+    time2 = forms.TimeField(initial=datetime.now().time())
     openSeats = forms.IntegerField(
         initial=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    # additionalDetails = forms.CharField(max_length=160)
+    additionalDetails = forms.CharField(max_length=160)
     class Meta:
         model = Event
         fields = ('title',
                   'address',
+                  'address2',
+                  'city',
+                  'state',
+                  'zipcode',
                   'date',
-                  'time',
+                  'time1',
+                  'time2',
                   'openSeats',
-                  'additionalDetails')
+                  'additionalDetails',)
     # def __init__(self, *args, **kwargs):
     #     self.user = kwargs.pop('user', None)
     #     super(EventForm, self).__init__(*args, **kwargs)

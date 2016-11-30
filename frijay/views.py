@@ -151,8 +151,9 @@ def host_event(request):
 
         if event_form.is_valid():
             event = event_form.save(commit=False)
-            event.host = request.user
+            event.host = userObj
             event.save()
+            return HttpResponseRedirect(reverse('events'))
         else:
             # invalid form or forms TODO
             print(event.errors)

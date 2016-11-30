@@ -18,7 +18,8 @@ class UserForm(forms.ModelForm):
                         "May contain only letters, numbers and _ characters."})
     email = forms.EmailField(
         label=("Email address *"),
-        widget=forms.TextInput(attrs=dict(unique=True,                                                            required=True,
+        widget=forms.TextInput(attrs=dict(unique=True,
+                                          required=True,
                                           max_length=30)))
     password = forms.CharField(
         label=("Password *"),
@@ -53,22 +54,27 @@ class UserProfileForm(forms.ModelForm):
         fields = ('picture',)
 
 class EventForm(forms.ModelForm):
-    """ Form to make an Event """
+    """ Form to Host a Dinner """
     title = forms.CharField(
         max_length=128, help_text="Please enter a title.")
     address = forms.CharField(
         max_length=160, help_text="Please enter the address.")
+    # host = forms.CharField(widget=forms.HiddenInput())
     date = forms.DateField(initial=datetime.today().date() + timedelta(days=7))
     time = forms.TimeField(initial=datetime.now().time())
     openSeats = forms.IntegerField(
         initial=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    # additionalDetails = forms.CharField(null=True, max_length=160)
+    additionalDetails = forms.CharField(max_length=160)
     class Meta:
         model = Event
         fields = ('title',
                   'address',
-                  'host',
                   'date',
                   'time',
                   'openSeats',
                   'additionalDetails')
+    # def __init__(self, *args, **kwargs):
+    #     self.user = kwargs.pop('user', None)
+    #     super(EventForm, self).__init__(*args, **kwargs)
+    # def clean_username(self):
+    #     return self.user.username

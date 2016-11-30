@@ -33,7 +33,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Frijay</a>
+                <a class="navbar-brand" href="/"><b>Frijay</b></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -46,8 +46,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="{% url 'host' %}">Host a Dinner</a></li>
-                    <li><a href="{% url 'reservation' %}">Reservations</a></li>
-                    <li><a href="{% url 'events' %}">Events</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'reservation' %}">Dinners I'm Going To</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'events' %}">Join a Dinner</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{% url 'about' %}">About Us</a></li>

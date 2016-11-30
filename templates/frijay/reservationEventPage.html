@@ -1,9 +1,10 @@
-<<<<<<< HEAD
 {% extends 'frijay/base.html' %}
 {% load staticfiles %}
 {% block title %}Events Page{% endblock %}
 
 {% block body %}
+{% autoescape off %}
+
 <br>
 <br>
 <br>
@@ -33,16 +34,5 @@
 
  <div style="clear:both"></div>    
 
-=======
-{% extends "frijay/base.html" %}
-{% block title %}Reservations{% endblock %}
-{% block body %}
-<h1>This is the events id : {{ event_id }}</h1>
-Title : {{ event_title }}<br>
-Host Name : {{ event_host }}<br>
-Address : {{ event_address }}<br>
-Date : {{ event_date }} {{ event_time }}<br>
-Number of Open Seats : {{ event_seats }}<br>
-Additional Details : {{ event_details }}<br>
->>>>>>> c0f69209b68e7f7f775e5ac150a88a18f5183603
+{% endautoescape %}
 {% endblock %}

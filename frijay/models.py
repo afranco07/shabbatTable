@@ -20,12 +20,20 @@ class Event(models.Model):
     title = models.CharField(max_length=80, unique=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     modified_at = models.DateTimeField(auto_now=True, editable=False)
-    address = models.CharField(max_length=200, null=True)
+    # Street Address, Line 1, required
+    address = models.CharField("Street Address", max_length=40)
+    address2 = models.CharField("Apt/Floor", max_length=40, null=True)
+    city = models.CharField(max_length=200)
+    state = models.CharField(max_length=20)
+    zipcode = models.CharField("ZIP code", max_length=5)
     host = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    date = models.DateField(null=True)
-    time = models.TimeField(null=True)
-    openSeats = models.IntegerField(null=True)
-    additionalDetails = models.TextField(blank=True, null=True)
+    date = models.DateField("Date")
+    time1 = models.TimeField("From")
+    time2 = models.TimeField("Till")
+    openSeats = models.IntegerField("Number of Seats Open")
+    additionalDetails = models.TextField("Additional Details",
+                                         blank=True,
+                                         null=True)
 
     def __str__(self):
         '''Makes the string representation
@@ -39,5 +47,3 @@ class Reservation(models.Model):
 
     def __str__(self):
         return self.event.name
-
-

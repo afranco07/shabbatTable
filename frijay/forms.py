@@ -64,7 +64,7 @@ class EventForm(forms.ModelForm):
     time = forms.TimeField(initial=datetime.now().time())
     openSeats = forms.IntegerField(
         initial=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    additionalDetails = forms.CharField(max_length=160)
+    # additionalDetails = forms.CharField(max_length=160)
     class Meta:
         model = Event
         fields = ('title',

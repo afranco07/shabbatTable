@@ -6,7 +6,7 @@
 {% block body %}
 <div class="jumbotron">
     {% if user.is_authenticated %}
-        <h1>Welcome, {{ user.username }}!</h1>
+        <h1>Welcome, {{ user.first_name }}!</h1>
 
     {% else %}
         <h1>Friday Dinner</h1>
@@ -14,7 +14,7 @@
     {% endif %}
 </div>
 <hr class="featurette-divider">
-<h3 style="text-align: center"> Search for Event</h3>
+<h3 style="text-align: center">Search for Event</h3>
 <div class="container">
     <div class="row">
         <div class="col-md-offset-3 col-md-6">

@@ -186,9 +186,10 @@ def reservationsEvent(request, event_id):
     context_dict = {'event_id' : event_id,
                     'event_title' : eventModel.title,
                     'event_host' : eventModel.host.first_name,
-                    'event_address' : eventModel.address,
+                    'event_city' : eventModel.city,
                     'event_date' : eventModel.date,
-                    'event_time' : eventModel.time1,
+                    'event_timefrom' : eventModel.time1,
+                    'event_timeto' : eventModel.time2,
                     'event_seats' : eventModel.openSeats,
                     'event_details' : eventModel.additionalDetails
                     }

@@ -94,8 +94,11 @@ class Command(BaseCommand):
         ]
 
         for u in users:
-            usr = User.objects.create_user(u['username'], u['email'], u['password'], first_name=u['first_name'],
-                                           last_name=u['last_name'])
+            usr = User.objects.create_user(
+                u['username'],
+                u['email'],
+                u['password'],
+                first_name=u['first_name'], last_name=u['last_name'])
             usr.save()
 
     def _populate_events(self):
@@ -108,6 +111,7 @@ class Command(BaseCommand):
                 "state": "NY",
                 "zipcode": "11236",
                 "host": User.objects.get_by_natural_key("Mitchy93"),
+                "phone": "2120008888",
                 "date": "2016-12-14",
                 "time1": "18:00:00",
                 "time2": "20:00:00",
@@ -122,6 +126,7 @@ class Command(BaseCommand):
                 "state": "NY",
                 "zipcode": "11354",
                 "host": User.objects.get_by_natural_key("DBL00"),
+                "phone": "2120009999",
                 "date": "2016-12-21",
                 "time1": "19:00:00",
                 "time2": "21:00:00",
@@ -136,11 +141,27 @@ class Command(BaseCommand):
                 "state": "NY",
                 "zipcode": "10032",
                 "host": User.objects.get_by_natural_key("Tklein"),
+                "phone": "2120001111",
                 "date": "2016-12-19",
                 "time1": "20:00:00",
                 "time2": "22:00:00",
                 "openSeats": 3,
                 "additionalDetails": "Good, cozy home cooked meal, games and dessert after :) All are welcome"
+            },
+            {
+                "title": "Dinner with my peeps",
+                "address": "225 George Washington Bridge",
+                "address2": "Floor 0.5",
+                "city": "Inwood",
+                "state": "NY",
+                "zipcode": "10045",
+                "host": User.objects.get_by_natural_key("Tklein"),
+                "phone": "2127771111",
+                "date": "2016-12-29",
+                "time1": "18:00:00",
+                "time2": "22:00:00",
+                "openSeats": 3,
+                "additionalDetails": "Let's have shabbat!"
             }
         ]
 
@@ -153,6 +174,7 @@ class Command(BaseCommand):
                 state=e['state'],
                 zipcode=e['zipcode'],
                 host=e['host'],
+                phone=e['phone'],
                 date=e['date'],
                 time1=e['time1'],
                 time2=e['time2'], openSeats=e['openSeats'],

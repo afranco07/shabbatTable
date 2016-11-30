@@ -17,12 +17,6 @@
                 <div class="well well-sm">
                     <a href="/frijay/events/{{event.id}}"><h3>{{event.title}}</h3></a>
                 </div>
-                <p>{{event.address}}</p>
-                <p>{{event.host}}</p>
-                <p>{{event.date}}</p>
-                <p>{{event.time}}</p>
-                <p>{{event.openSeat}}</p>
-                <p>{{event.additionalDetails}}</p>
 
                 {% if user.is_authenticated %}
                     {% reservation_exists user event as exists %}

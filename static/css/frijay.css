@@ -46,3 +46,7 @@ input[type=text]:focus {
     background-color: #e6e6e6;
     box-shadow: 10px 10px #b3b3b3;
 }
+.footerr{
+  position: relative;
+  clear: both;
+}

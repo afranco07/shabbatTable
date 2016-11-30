@@ -21,10 +21,11 @@
                 <div class="well well-sm">
                     <h3>{{event_title}}</h3>
                 </div>
-                <p><b>Location: </b>{{event_address}}</p>
+                <p><b>Location: </b>{{event_city}}</p>
                 <p><b>Host: </b>{{event_host}}</p>
                 <p><b>Address: </b>{{event_date}}</p>
-                <p><b>Time: </b>{{event_time}}</p>
+                <p><b>From: </b>{{event_timefrom}}</p>
+                <p><b>To: </b>{{event_timeto}}</p>
                 <p><b>Seats Available: </b>{{event_seats}}</p>
                 <p><b>Additional Info: </b>{{event_details}}</p>
                 <a href="/frijay/events/">Back to events</a>
@@ -32,7 +33,7 @@
                 </div>
                 </div>
 
- <div style="clear:both"></div>    
+ <div style="clear:both"></div>
 
 {% endautoescape %}
 {% endblock %}

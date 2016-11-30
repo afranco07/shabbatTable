@@ -150,8 +150,10 @@ def host_event(request):
         event_form = EventForm(data=request.POST)
 
         if event_form.is_valid():
-            event = event_form.save()
+            event = event_form.save(commit=False)
+            event.host = userObj
             event.save()
+            return HttpResponseRedirect(reverse('events'))
         else:
             # invalid form or forms TODO
             print(event.errors)
@@ -184,9 +186,10 @@ def reservationsEvent(request, event_id):
     context_dict = {'event_id' : event_id,
                     'event_title' : eventModel.title,
                     'event_host' : eventModel.host.first_name,
-                    'event_address' : eventModel.address,
+                    'event_city' : eventModel.city,
                     'event_date' : eventModel.date,
-                    'event_time' : eventModel.time,
+                    'event_timefrom' : eventModel.time1,
+                    'event_timeto' : eventModel.time2,
                     'event_seats' : eventModel.openSeats,
                     'event_details' : eventModel.additionalDetails
                     }

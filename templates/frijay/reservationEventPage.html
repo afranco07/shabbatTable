@@ -1,11 +1,38 @@
-{% extends "frijay/base.html" %}
-{% block title %}Reservations{% endblock %}
+{% extends 'frijay/base.html' %}
+{% load staticfiles %}
+{% block title %}Events Page{% endblock %}
+
 {% block body %}
-<h1>This is the events id : {{ event_id }}</h1>
-Title : {{ event_title }}<br>
-Host Name : {{ event_host }}<br>
-Address : {{ event_address }}<br>
-Date : {{ event_date }} {{ event_time }}<br>
-Number of Open Seats : {{ event_seats }}<br>
-Additional Details : {{ event_details }}<br>
+{% autoescape off %}
+
+<br>
+<br>
+<br>
+<div class="col-sm-8 col-md-6">
+        <div class="thumbnail">
+            <img src="{% static "images/image2.jpg" %}" alt="My image" />
+            <div class="caption">
+                </div>
+                </div>
+                </div>
+<div class="col-sm-8 col-md-6">
+        <div class="thumbnail">
+            <div class="caption">
+                <div class="well well-sm">
+                    <h3>{{event_title}}</h3>
+                </div>
+                <p><b>Location: </b>{{event_address}}</p>
+                <p><b>Host: </b>{{event_host}}</p>
+                <p><b>Address: </b>{{event_date}}</p>
+                <p><b>Time: </b>{{event_time}}</p>
+                <p><b>Seats Available: </b>{{event_seats}}</p>
+                <p><b>Additional Info: </b>{{event_details}}</p>
+                <a href="/frijay/events/">Back to events</a>
+                </div>
+                </div>
+                </div>
+
+ <div style="clear:both"></div>    
+
+{% endautoescape %}
 {% endblock %}

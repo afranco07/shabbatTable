@@ -49,10 +49,14 @@
             </form>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    {% if user.is_authenticated %}
                     <li><a href="{% url 'host' %}">Host a Dinner</a></li>
                     <li><a href="{% url 'reservation' %}">Reservations</a></li>
+                    {% endif %}
                     <li><a href="{% url 'events' %}">Events</a></li>
+                    {% if user.is_authenticated %}
                     <li><a href="{% url 'myevents' %}">My Events</a></li>
+                    {% endif %}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{% url 'about' %}">About Us</a></li>

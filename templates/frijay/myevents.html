@@ -24,7 +24,7 @@
                     </form>
                     <hr>
                     <h5><b>Pending Reservations</b></h5>
-                    {% for guest in guests_u %}
+                    {% for guest in guests_u %} TODO FIX THIS GUEST AND EVENTS NEED TO BE LINKED
                     <li>{{ guest.first_name }} {{ guest.last_name }} - {{ guest.email }}<br>
                         <form method="POST">{% csrf_token %}
                         <button type="submit" class="label label-success" value="{{ guest.username }}" name = "approve">Approve Request</button>

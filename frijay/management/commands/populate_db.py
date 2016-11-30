@@ -22,6 +22,13 @@ class Command(BaseCommand):
     def _populate_users(self):
         users = [
             {
+                "username": 'jonathanrozario',
+                "password": "qwerty",
+                "first_name": "Jonathan",
+                "last_name": "Rozario",
+                "email": "jonathanrozario@gmail.com"
+            },
+            {
                 "username": 'Jack698',
                 "password": "A4B2N6",
                 "first_name": "Jack",

@@ -13,7 +13,7 @@ from frijay.forms import UserForm, UserProfileForm, EventForm
 
 
 def test(request):
-    return HttpResponse("eECCuec9vVdb2h6cpZuHz0sy4jSGku7-Z_cMVN9m2do.7uXwYafMAKcbBvPD3IKbGP-UtWkqx5u7iJT1pnHTGQU")
+    return HttpResponse("eReWBQ7S1xVgd2si8FrfP4hHhZO3vtXQjctnzZZ70HM.7uXwYafMAKcbBvPD3IKbGP-UtWkqx5u7iJT1pnHTGQU")
 
 def index(request):
     '''index page view'''

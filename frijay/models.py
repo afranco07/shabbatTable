@@ -27,7 +27,7 @@ class Event(models.Model):
     state = models.CharField("State", max_length=20)
     zipcode = models.CharField("ZIP code", max_length=5)
     host = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    phone = models.IntegerField("Phone")
+    phone = models.BigIntegerField("Phone")
     date = models.DateField("Date")
     time1 = models.TimeField("Starting at")
     time2 = models.TimeField("Ending at")

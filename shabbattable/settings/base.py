@@ -145,3 +145,4 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_URL = '/frijay/login'
+

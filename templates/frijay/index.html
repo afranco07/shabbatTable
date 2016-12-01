@@ -34,9 +34,9 @@
 {% for event in Events %}
     <div class="col-sm-4 col-md-3">
         <div class="thumbnail">
-            <img src="{% static "images/image6.jpg" %}" alt="My image" />
+            <img src="{% static "images/image2.jpg" %}" alt="My image" />
             <div class="caption">
-                <a href="/frijay/events/{{event.id}}">
+                <a href="/frijay/events/{{event.id}}" style="text-decoration: none">
                     <h3>{{event.title}}</h3></a>
                     <p><b>Host: </b>{{event.host}}</p>
                     <p><b>Location: </b>{{ event.city }}</p>

@@ -11,10 +11,6 @@ from frijay.twilio import send_reservation_sms
 from frijay.forms import UserForm, UserProfileForm, EventForm
 
 
-
-def test(request):
-    return HttpResponse("eReWBQ7S1xVgd2si8FrfP4hHhZO3vtXQjctnzZZ70HM.7uXwYafMAKcbBvPD3IKbGP-UtWkqx5u7iJT1pnHTGQU")
-
 def index(request):
     '''index page view'''
     context_dict = {'title': "Frijay!"}

@@ -20,7 +20,7 @@ def send_reservation_sms(user,event):
     client.messages.create(
         to=phone,
         from_="+16467624316",
-        body="Hi " + host + "! This is Frijay. We received a reservation request from " + guest + " (" + email + ") for your dinner event, " + title + ". Please review this request at your earliest convenience.\nView this reservation at shabbattable.heroku.com/frijay/myevents/",
+        body="Hi " + host + "! This is Frijay. We received a reservation request from " + guest + " (" + email + ") for your dinner event, " + title + ". Please review this request at your earliest convenience.\nView this reservation at shabbattable.heroku.com/myevents/",
     )
 
 

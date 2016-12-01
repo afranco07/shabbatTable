@@ -20,7 +20,7 @@
                  {% if event.title|length <  26 %}
                     <h3>{{event.title}}</h3>
                     {% else %}
-                    <h3>{{ event.title|truncatechars:19}}</h3>
+                    <h3>{{ event.title|truncatechars:22}}</h3>
                     {% endif %}
                     <p><b>Location: </b>{{ event.city }}</p>
                     <p><b>Date: </b>{{ event.date }}</p>

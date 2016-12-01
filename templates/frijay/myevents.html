@@ -42,6 +42,10 @@
                     <h5><b>Approved Reservations</b></h5>
                     {% for guest in container.guests_a %}
                     <li>{{ guest.first_name }} {{ guest.last_name }} - {{ guest.email }}</li>
+                        <form method="POST">{% csrf_token %}
+                        <button type="submit" class="label label-warning" value="{{ guest.username }}" name = "decline">Remove Guest</button>
+                        <input type="hidden" name="event" value="{{ container.event.title }}" >
+                        </form>
                     {% empty %}
                     <p><i>No accepted guests yet</i></p>
                     {% endfor %}

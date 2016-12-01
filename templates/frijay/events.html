@@ -17,7 +17,7 @@
             <img src="{% static "images/image2.jpg" %}" alt="My image" />
             <div class="caption">
             <a style="text-decoration:None;display:block;" href="/events/{{event.id}}"><div class="well well-sm">
-                 {% if event.title|length <  26 %}
+                 {% if event.title|length <  22 %}
                     <h3>{{event.title}}</h3>
                 {% else %}
                     <h3>{{ event.title|truncatechars:22}}</h3>

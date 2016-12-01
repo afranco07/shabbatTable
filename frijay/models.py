@@ -12,7 +12,7 @@ class UserProfile(models.Model):
 
     def __str__(self):
         '''Return username of the user'''
-        return self.user.username
+        return self.user
 
 
 class Event(models.Model):
@@ -43,6 +43,7 @@ class Event(models.Model):
 
 
 class Reservation(models.Model):
+    """Model for a reservation to a dinner"""
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     guest = models.ForeignKey(User, on_delete=models.CASCADE)
     accept = models.NullBooleanField(null=True, default=None)

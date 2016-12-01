@@ -1,7 +1,7 @@
+"""Forms for the project are created here"""
+from datetime import datetime, timedelta
 from django import forms
 from django.contrib.auth.models import User
-from django.core.validators import MinValueValidator, MaxValueValidator
-from datetime import datetime, timedelta
 from frijay.models import UserProfile, Event
 
 
@@ -15,7 +15,7 @@ class UserForm(forms.ModelForm):
         regex=r'^[\w]+$',
         required=True,
         error_messages={'invalid':
-                        "May contain only letters, numbers and _ characters."})
+                            "May contain only letters, numbers and _ characters."})
     email = forms.EmailField(
         label=("Email address *"),
         widget=forms.TextInput(attrs=dict(unique=True,
@@ -26,13 +26,9 @@ class UserForm(forms.ModelForm):
         widget=forms.PasswordInput(attrs=dict(required=True,
                                               max_length=30,
                                               render_value=False)))
-    # password2 = forms.CharField(
-    #     label=("Confirm Password *"),
-    #     widget=forms.PasswordInput(attrs=dict(required=True,
-    #                                           max_length=30,
-    #                                           render_value=False)))
 
     class Meta:
+        """Connects UserForm to the built-in model User"""
         model = User
         fields = ('first_name',
                   'last_name',
@@ -41,6 +37,7 @@ class UserForm(forms.ModelForm):
                   'password')
 
     def clean_email(self):
+        '''Cleans email address input'''
         data = self.cleaned_data['email']
         if User.objects.filter(email=data).exists():
             raise forms.ValidationError(
@@ -49,14 +46,17 @@ class UserForm(forms.ModelForm):
 
 
 class UserProfileForm(forms.ModelForm):
+    """Form for user profile"""
     class Meta:
+        """Connects UserProfile to the model UserProfile"""
         model = UserProfile
         fields = ('picture',)
+
 
 class EventForm(forms.ModelForm):
     """ Form to Host a Dinner. Host name selected in the views. """
     title = forms.CharField(label="Title *",
-        widget=forms.TextInput(attrs={'required':True, 'max_length':30}))
+                            widget=forms.TextInput(attrs={'required': True, 'max_length': 30}))
     # Street Address, Line 1
     address = forms.CharField(label="Street Address *",
                               required=True,
@@ -76,12 +76,13 @@ class EventForm(forms.ModelForm):
     # Ending time
     time2 = forms.TimeField(label="Ending at", initial=datetime.now().time())
     openSeats = forms.IntegerField(label="Available Seats",
-        initial=10, min_value=1, max_value=10)
+                                   initial=10, min_value=1, max_value=10)
     additionalDetails = forms.CharField(
         label="Details",
         widget=forms.Textarea(attrs=dict(max_length=160)))
 
     class Meta:
+        """Connects EventForm to the model Event"""
         model = Event
         fields = ('title',
                   'address',

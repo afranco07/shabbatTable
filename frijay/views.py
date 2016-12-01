@@ -6,11 +6,14 @@ from frijay.models import Event, Reservation
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.template import loader
+from frijay.twilio import send_reservation_sms
 from frijay.forms import UserForm, UserProfileForm, EventForm
 
 
+
+def test(request):
+    return HttpResponse("eECCuec9vVdb2h6cpZuHz0sy4jSGku7-Z_cMVN9m2do.7uXwYafMAKcbBvPD3IKbGP-UtWkqx5u7iJT1pnHTGQU")
 
 def index(request):
     '''index page view'''
@@ -138,13 +141,13 @@ def events(request):
     all_events = Event.objects.all()
     context_dict = {'html_list': all_events}
     if request.POST.get('reserve') and Event.objects.get(title=request.POST.get('reserve')).openSeats > 0:
-        uid = request.user
-        userobj = User.objects.get(id=int(uid.id))
+        user = User.objects.get(id=int(request.user.id))
         evnt = Event.objects.get(title=request.POST.get('reserve'))
         evnt.openSeats -= 1
         evnt.save()
-        res = Reservation.objects.get_or_create(event=evnt, guest=userobj)[0]
+        res = Reservation.objects.get_or_create(event=evnt, guest=user)[0]
         res.save()
+        send_reservation_sms(user, evnt)
 
     return render(request, 'frijay/events.html', context_dict)
 
@@ -171,23 +174,37 @@ def host_event(request):
 
 @login_required
 def reservation(request):
-    uid = request.user
-    userobj = User.objects.get(id=int(uid.id))
+    '''Reservations View, Users will view their pending, accepted, and rejected
+        Reservations here. They will have the ability to cancel their reservations
+        if they see fit.'''
+    # Get the user object from session
+    user = User.objects.get(id=int(request.user.id))
+    # If POST request to cancel reservation
     if (request.POST.get('cancel')):
+        # Fetch the event of this reservation via title
         evnt = Event.objects.get(title=request.POST.get('cancel'))
-        if Reservation.objects.get(guest=userobj, event=evnt).accept is not False:
+        # If the reservation was not a declined reservation (see MyEvents for details)
+        if Reservation.objects.get(guest=user, event=evnt).accept is not False:
+            # Add an open seat to the Event openSeats field
             evnt.openSeats += 1
             evnt.save()
-        Reservation.objects.get(event=evnt, guest=userobj).delete()
+        # Delete the reservation from the system.
+        Reservation.objects.get(event=evnt, guest=user).delete()
 
     context_dict = {}
-    reservations = Reservation.objects.filter(guest=userobj)
+    # Get reservations where the current user is an applicant
+    reservations = Reservation.objects.filter(guest=user)
+    # Store them into a list for displaying
     context_dict['reservations'] = [x for x in reservations]
+    # And send it to the renderer.
     return render(request, 'frijay/reservation.html', context_dict)
 
 
 @login_required
 def myevents(request):
+    '''My Events page, for hosts to manage their events.
+    This will allow hosts to accept or decline reservation
+    requests from users.'''
     if (request.method == "POST"):
         print(request.body)
         if (request.POST.get('cancel')):

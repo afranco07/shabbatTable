@@ -55,18 +55,18 @@ class UserProfileForm(forms.ModelForm):
 
 class EventForm(forms.ModelForm):
     """ Form to Host a Dinner. Host name selected in the views. """
-    title = forms.CharField(
+    title = forms.CharField(label="Title *",
         widget=forms.TextInput(attrs={'required':True, 'max_length':30}))
     # Street Address, Line 1
-    address = forms.CharField(label="Street Address",
+    address = forms.CharField(label="Street Address *",
                               required=True,
                               max_length=160,
                               help_text="Please enter the address.")
     # Street Address, Line 2
-    address2 = forms.CharField(label="Apt / Floor", max_length=40)
-    city = forms.CharField(label="City", required=True, max_length=15)
-    state = forms.CharField(label="State", required=True, max_length=15)
-    zipcode = forms.IntegerField(label="ZIP code",
+    address2 = forms.CharField(label="Apt / Floor *", max_length=40)
+    city = forms.CharField(label="City *", required=True, max_length=15)
+    state = forms.CharField(label="State *", required=True, max_length=15)
+    zipcode = forms.IntegerField(label="ZIP code *",
                                  min_value=10000,
                                  max_value=99999)
     phone = forms.IntegerField(min_value=1000000000, max_value=9999999999)
@@ -76,7 +76,7 @@ class EventForm(forms.ModelForm):
     # Ending time
     time2 = forms.TimeField(label="Ending at", initial=datetime.now().time())
     openSeats = forms.IntegerField(label="Available Seats",
-        initial=1, min_value=1, max_value=10)
+        initial=10, min_value=1, max_value=10)
     additionalDetails = forms.CharField(
         label="Details",
         widget=forms.Textarea(attrs=dict(max_length=160)))

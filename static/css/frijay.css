@@ -50,3 +50,11 @@ input[type=text]:focus {
   position: relative;
   clear: both;
 }
+.form-group.sign input {
+  outline: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+  font-size: 18px;
+  color: black;
+  font-weight: 300;
+}

@@ -35,12 +35,12 @@
                         enctype="multipart/form-data">
                         {% csrf_token %}
 						{% for field in user_form %}
-  	                          <div class="form-group">
+  	                          <div class="form-group sign">
   	                              {{ field.errors }}
 
 
   	                              <label class="form-group" for="{{ field.id_for_label }}" data-success="">{{  field.label }}</label><br />
-								  <input class="form-control" {{ field }} </input>
+								  <input class="form-control sign" {{ field }} </input>
 
 
 

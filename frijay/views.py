@@ -6,12 +6,14 @@ from frijay.models import Event, Reservation
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.template import loader
 from frijay.twilio import send_reservation_sms
 from frijay.forms import UserForm, UserProfileForm, EventForm
 
 
+
+def test(request):
+    return HttpResponse("eECCuec9vVdb2h6cpZuHz0sy4jSGku7-Z_cMVN9m2do.7uXwYafMAKcbBvPD3IKbGP-UtWkqx5u7iJT1pnHTGQU")
 
 def index(request):
     '''index page view'''

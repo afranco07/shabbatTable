@@ -8,6 +8,7 @@
 <br>
 <br>
 <br>
+{% if user.is_authenticated %}
 <div class="col-sm-8 col-md-6">
         <div class="thumbnail">
             <img src="{% static "images/image2.jpg" %}" alt="My image" />
@@ -32,8 +33,16 @@
                 </div>
                 </div>
                 </div>
+              {% else %}
+              <center>
+<h1>Please sign up to view event's details</h1>
+        <p><a class="btn btn-danger btn-md" href="{% url 'signup' %}" role="button">Sign Up</a></p>
+   </center>
+
+    {% endif %}
 
  <div style="clear:both"></div>
+
 
 {% endautoescape %}
 {% endblock %}

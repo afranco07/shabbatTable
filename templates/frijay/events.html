@@ -18,6 +18,11 @@
             <div class="caption">
                 <div class="well well-sm">
                     <a href="/frijay/events/{{event.id}}"><h3>{{event.title}}</h3></a>
+                    {% if event.openSeats > 0 %}
+                    <h5>Open Seats: <span class="badge">{{ event.openSeats }}</span></h5>
+                    {% else %}
+                    <h5><i><b>Seats Filled</b></i></h5>
+                    {% endif %}
                 </div>
 
                 {% if user.is_authenticated %}
@@ -26,13 +31,17 @@
                     {% if host %}
                 <a style="text-decoration: none;" href="{% url 'myevents' %}"><span class="label label-info">You're The Host</span></a>
                     {% elif exists is False %}
+                    {% if event.openSeats > 0 %}
                     <form method="POST">{% csrf_token %}
                         <button type="submit" class="btn btn-primary" value="{{event.title}}" name = "reserve">Reserve a Seat</button>
                     </form>
                     {% else %}
+                    <span class="btn btn-default">Reservations Closed</span>
+                    {% endif %}
+                    {% else %}
                         {% fetch_reservation event.title user as res %}
                         {% if res.accept is None %}
-                        <a style="text-decoration: none;" href="{% url 'reservation' %}"><span class="label label-warning">Request Sent - Pending Approval from Host</span></a>
+                        <a style="text-decoration: none;" href="{% url 'reservation' %}"><span class="label label-warning">Request Sent - Pending Approval</span></a>
                         {% elif res.accept %}
                         <a style="text-decoration: none;" href="{% url 'reservation' %}"><span class="label label-success">Reservation Approved!</span></a>
                         {% elif not res.accept %}
@@ -40,7 +49,11 @@
                         {% endif %}
                 {% endif %}
                 {% else %}
-                    <a href="{% url 'login' %}?next=/frijay/events/", class="btn btn-primary">RSVP</a>
+                    {% if event.openSeats > 0 %}
+                    <a href="{% url 'login' %}?next=/frijay/events/", class="btn btn-primary">Reserve a Seat</a>
+                    {% else %}
+                    <span class="btn btn-default">Reservations Closed</span>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>

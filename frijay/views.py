@@ -137,10 +137,12 @@ def events(request):
     '''Event View'''
     all_events = Event.objects.all()
     context_dict = {'html_list': all_events}
-    if (request.POST.get('reserve')):
+    if request.POST.get('reserve') and Event.objects.get(title=request.POST.get('reserve')).openSeats > 0:
         uid = request.user
         userobj = User.objects.get(id=int(uid.id))
         evnt = Event.objects.get(title=request.POST.get('reserve'))
+        evnt.openSeats -= 1
+        evnt.save()
         res = Reservation.objects.get_or_create(event=evnt, guest=userobj)[0]
         res.save()
 
@@ -171,12 +173,11 @@ def host_event(request):
 def reservation(request):
     uid = request.user
     userobj = User.objects.get(id=int(uid.id))
-    if (request.POST.get('reserve')):
-        evnt = Event.objects.get(title=request.POST.get('event'))
-        res = Reservation.objects.get_or_create(event=evnt, guest=userobj)[0]
-        res.save()
-    elif (request.POST.get('cancel')):
+    if (request.POST.get('cancel')):
         evnt = Event.objects.get(title=request.POST.get('cancel'))
+        if Reservation.objects.get(guest=userobj, event=evnt).accept is not False:
+            evnt.openSeats += 1
+            evnt.save()
         Reservation.objects.get(event=evnt, guest=userobj).delete()
 
     context_dict = {}
@@ -203,6 +204,8 @@ def myevents(request):
             rev = Reservation.objects.get(event=evnt, guest=usr)
             rev.accept = False
             rev.save()
+            evnt.openSeats += 1
+            evnt.save()
 
     context_dict = {}
     uid = request.user

@@ -64,8 +64,8 @@ def signup(request):
             # Now we save the UserProfile model instance.
             profile.save()
 
-             # Update our variable to indicate that the template
-             # registration was successful.
+            # Update our variable to indicate that the template
+            # registration was successful.
             registered = True
 
         else:
@@ -100,7 +100,7 @@ def user_login(request):
                 login(request, user)
                 return HttpResponseRedirect(reverse('index'))
             else:
-            # An inactive account was used - no logging in!
+                # An inactive account was used - no logging in!
                 return HttpResponse("Your account is disabled.")
 
         # No user # with matching credentials was found.
@@ -108,10 +108,11 @@ def user_login(request):
             # Bad login details were provided. So we can't log the user in.
             print("Invalid login details: {0}, {1}".format(username, password))
             return HttpResponse("Invalid login details supplied.")
-        # The request is not a HTTP POST, so display the login form. # This scenario would most likely be a HTTP GET.
+            # The request is not a HTTP POST, so display the login form. # This scenario would most likely be a HTTP GET.
     else:
         # No context variables to pass to the template system, hence the # blank dictionary object...
         return render(request, 'frijay/login.html', {})
+
 
 @login_required
 def user_logout(request):
@@ -120,27 +121,33 @@ def user_logout(request):
     # Take the user back to the homepage.
     return HttpResponseRedirect(reverse('index'))
 
+
 def profile(request):
     '''user profile page view'''
     context_dict = {'title': "Profile"}
     return render(request, 'frijay/profile.html', context_dict)
 
+
 def redir(request):
     '''redirection view'''
     return redirect('/frijay')
 
+
 def events(request):
     '''Event View'''
     all_events = Event.objects.all()
-    context_dict = {'html_list' : all_events}
-    if(request.POST.get('reserve')):
+    context_dict = {'html_list': all_events}
+    if request.POST.get('reserve') and Event.objects.get(title=request.POST.get('reserve')).openSeats > 0:
         uid = request.user
         userobj = User.objects.get(id=int(uid.id))
         evnt = Event.objects.get(title=request.POST.get('reserve'))
+        evnt.openSeats -= 1
+        evnt.save()
         res = Reservation.objects.get_or_create(event=evnt, guest=userobj)[0]
         res.save()
 
     return render(request, 'frijay/events.html', context_dict)
+
 
 @login_required
 def host_event(request):
@@ -150,8 +157,10 @@ def host_event(request):
         event_form = EventForm(data=request.POST)
 
         if event_form.is_valid():
-            event = event_form.save()
+            event = event_form.save(commit=False)
+            event.host = userObj
             event.save()
+            return HttpResponseRedirect(reverse('myevents'))
         else:
             # invalid form or forms TODO
             print(event.errors)
@@ -164,29 +173,62 @@ def host_event(request):
 def reservation(request):
     uid = request.user
     userobj = User.objects.get(id=int(uid.id))
-    if(request.POST.get('reserve')):
-        evnt = Event.objects.get(title=request.POST.get('event'))
-        res = Reservation.objects.get_or_create(event=evnt, guest=userobj)[0]
-        res.save()
-    elif(request.POST.get('cancel')):
+    if (request.POST.get('cancel')):
         evnt = Event.objects.get(title=request.POST.get('cancel'))
+        if Reservation.objects.get(guest=userobj, event=evnt).accept is not False:
+            evnt.openSeats += 1
+            evnt.save()
         Reservation.objects.get(event=evnt, guest=userobj).delete()
 
     context_dict = {}
-    context_dict['events'] = Event.objects.all()
     reservations = Reservation.objects.filter(guest=userobj)
     context_dict['reservations'] = [x for x in reservations]
     return render(request, 'frijay/reservation.html', context_dict)
+
+
+@login_required
+def myevents(request):
+    if (request.method == "POST"):
+        print(request.body)
+        if (request.POST.get('cancel')):
+            Event.objects.get(title=request.POST.get('cancel')).delete()
+        elif (request.POST.get('approve')):
+            usr = User.objects.get(username=request.POST.get('approve'))
+            evnt = Event.objects.get(title=request.POST.get('event'))
+            rev = Reservation.objects.get(event=evnt, guest=usr)
+            rev.accept = True
+            rev.save()
+        elif (request.POST.get('decline')):
+            usr = User.objects.get(username=request.POST.get('decline'))
+            evnt = Event.objects.get(title=request.POST.get('event'))
+            rev = Reservation.objects.get(event=evnt, guest=usr)
+            rev.accept = False
+            rev.save()
+            evnt.openSeats += 1
+            evnt.save()
+
+    context_dict = {}
+    uid = request.user
+    user = User.objects.get(id=int(uid.id))
+    myevents_list = [x for x in Event.objects.all() if x.host == user]
+    context_dict['event_list'] = []
+    for event in myevents_list:
+        reservations = Reservation.objects.filter(event=event)
+        context_dict['event_list'].append({"event": event, "guests_u": [x.guest for x in reservations if x.accept is None],
+                                           "guests_a": [x.guest for x in reservations if x.accept]})
+    return render(request, 'frijay/myevents.html', context_dict)
+
 
 def reservationsEvent(request, event_id):
     '''Event view for specific event'''
     eventModel = Event.objects.get(id = event_id)
     context_dict = {'event_id' : event_id,
                     'event_title' : eventModel.title,
-                    'event_host' : eventModel.host.first_name,
-                    'event_address' : eventModel.address,
+                    'event_host' : eventModel.host.first_name + " " + eventModel.host.last_name,
+                    'event_city' : eventModel.city,
                     'event_date' : eventModel.date,
-                    'event_time' : eventModel.time,
+                    'event_timefrom' : eventModel.time1,
+                    'event_timeto' : eventModel.time2,
                     'event_seats' : eventModel.openSeats,
                     'event_details' : eventModel.additionalDetails
                     }

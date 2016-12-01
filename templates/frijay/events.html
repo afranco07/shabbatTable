@@ -16,20 +16,22 @@
         <div class="thumbnail">
             <img src="{% static "images/image2.jpg" %}" alt="My image" />
             <div class="caption">
-                <div class="well well-sm">
-                    <a href="/frijay/events/{{event.id}}"><h3>{{event.title}}</h3></a>
+                 <a style="text-decoration:None;display:block;" href="/frijay/events/{{event.id}}"><div class="well well-sm">
+                    <h3>{{event.title}}</h3>
+                    <p><b>Location: </b>{{ event.city }}</p>
+                    <p><b>Date: </b>{{ event.date }}</p>
                     {% if event.openSeats > 0 %}
                     <h5>Open Seats: <span class="badge">{{ event.openSeats }}</span></h5>
                     {% else %}
                     <h5><i><b>Seats Filled</b></i></h5>
                     {% endif %}
-                </div>
+                 </div></a>
 
                 {% if user.is_authenticated %}
                     {% reservation_exists user event as exists %}
                     {% is_host event.title user as host %}
                     {% if host %}
-                <a style="text-decoration: none;" href="{% url 'myevents' %}"><span class="label label-info">You're The Host</span></a>
+                    <a style="text-decoration: none;" href="{% url 'myevents' %}"><span class="label label-info">You're The Host</span></a>
                     {% elif exists is False %}
                     {% if event.openSeats > 0 %}
                     <form method="POST">{% csrf_token %}

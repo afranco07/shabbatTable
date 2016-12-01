@@ -57,7 +57,7 @@
                     <li><a href="{% url 'events' %}"><span class="glyphicon glyphicon-glass" aria-hidden="true"></span> Join a Dinner</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{% url 'about' %}"><span class="glyphicon glyphicon-education" aria-hidden="true"></span> About Us</a></li>
+                    <li><a href="{% url 'about' %}"><span class="glyphicon glyphicon-glass" aria-hidden="true"></span> About Us</a></li>
 
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out</a></li>

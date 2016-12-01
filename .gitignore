@@ -1,6 +1,7 @@
 *.pyc
 *.sqlite3
 .idea
+reset_db.sh
 venv/
 frijay/migrations/*
 !frijay/migrations/__init__.py

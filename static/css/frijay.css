@@ -10,6 +10,17 @@
     background-size: cover;
     background-repeat: no-repeat;
     color: white;
+
+}
+
+.jumbotron2{
+    height: 500px;
+    margin-top: 0!important;
+    background-image: url(../images/about.jpg);
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
 }
 .jumbotron h1{
     opacity: 0.9;
@@ -37,7 +48,7 @@ input[type=text]:focus {
 .about p{
     text-align: center;
     font-family: 'Quicksand', sans-serif;
-    font-size: 19px;
+    font-size: 26px;
 }
 .h1-font{
     font-family: 'Raleway',sans-serif;

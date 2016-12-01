@@ -12,11 +12,23 @@
 <ul>
 	{% for x in reservations %}
 	<li>
-		{{ x.event.title }} -- {{ x.event.date}} at {{ x.event.time1 }} , Host: {{ x.event.host.first_name }} {{ x.event.host.last_name }}
+		<div>{{ x.event.title }} -- {{ x.event.date}} at {{ x.event.time1 }} to {{ x.event.time2 }} , Host: {{ x.event.host.first_name }} {{ x.event.host.last_name }}<br>
+		<h5><b style="float: left; padding-right:5px;">Status:</b></h5>
+		{% if x.accept is none %}
+        <span class="label label-warning">Request Sent - Pending Approval</span>
+		{% elif x.accept %}
+        <span class="label label-success">Reservation Approved!</span>
+		{% elif not x.accept %}
+        <span class="label label-danger">Reservation Declined by Host</span>
+		{% endif %}
+            <br>
 		<form method="POST">{% csrf_token %}
 			<button type="submit" value="{{ x.event.title }}" name="cancel">Cancel</button>
 		</form>
+        </div>
 	</li>
+	{% empty %}
+	<h5>You currently do not have any reservations. <a href="{% url 'events' %}">Reserve a seat at the dinner table!</a></h5>
 	{% endfor %}
 </ul>
 {% else %}

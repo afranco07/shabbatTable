@@ -1,6 +1,8 @@
 {% extends "frijay/base.html" %}
 {% load staticfiles %}
 {% load reserv_exists %}
+{% load is_host %}
+{% load fetch_reservation %}
 
 
 {% block title %}Events Page{% endblock %}
@@ -14,24 +16,50 @@
         <div class="thumbnail">
             <img src="{% static "images/image2.jpg" %}" alt="My image" />
             <div class="caption">
-                <div class="well well-sm">
-                    <a href="/frijay/events/{{event.id}}"><h3>{{event.title}}</h3></a>
-                </div>
+                 <a style="text-decoration:None;display:block;" href="/frijay/events/{{event.id}}"><div class="well well-sm">
+                    <h3>{{event.title}}</h3>
+                    <p><b>Location: </b>{{ event.city }}</p>
+                    <p><b>Date: </b>{{ event.date }}</p>
+                    {% if event.openSeats > 0 %}
+                    <h5>Open Seats: <span class="badge">{{ event.openSeats }}</span></h5>
+                    {% else %}
+                    <h5><i><b>Seats Filled</b></i></h5>
+                    {% endif %}
+                 </div></a>
 
                 {% if user.is_authenticated %}
                     {% reservation_exists user event as exists %}
-                    {% if exists is False %}
+                    {% is_host event.title user as host %}
+                    {% if host %}
+                    <a style="text-decoration: none;" href="{% url 'myevents' %}"><span class="label label-info">You're The Host</span></a>
+                    {% elif exists is False %}
+                    {% if event.openSeats > 0 %}
                     <form method="POST">{% csrf_token %}
                         <button type="submit" class="btn btn-primary" value="{{event.title}}" name = "reserve">Reserve a Seat</button>
                     </form>
                     {% else %}
-                    <a style="text-decoration: none;" href="{% url 'reservation' %}"><span class="label label-success">Reserved</span></a>
+                    <span class="btn btn-default">Reservations Closed</span>
+                    {% endif %}
+                    {% else %}
+                        {% fetch_reservation event.title user as res %}
+                        {% if res.accept is None %}
+                        <a style="text-decoration: none;" href="{% url 'reservation' %}"><span class="label label-warning">Request Sent - Pending Approval</span></a>
+                        {% elif res.accept %}
+                        <a style="text-decoration: none;" href="{% url 'reservation' %}"><span class="label label-success">Reservation Approved!</span></a>
+                        {% elif not res.accept %}
+                        <a style="text-decoration: none;" href="{% url 'reservation' %}"><span class="label label-danger">Reservation Declined by Host</span></a>
+                        {% endif %}
+                {% endif %}
+                {% else %}
+                    {% if event.openSeats > 0 %}
+                    <a href="{% url 'login' %}?next=/frijay/events/", class="btn btn-primary">Reserve a Seat</a>
+                    {% else %}
+                    <span class="btn btn-default">Reservations Closed</span>
                     {% endif %}
                 {% endif %}
             </div>
         </div>
     </div>
-
 {% endfor %}
      <div style="clear:both"></div>
 

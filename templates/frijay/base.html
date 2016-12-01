@@ -20,6 +20,10 @@
     {#      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>#}
     {#      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>#}
     <![endif]-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{%  static 'js/bootstrap.min.js' %}"></script>
 </head>
 <body>
 <!-- ============================This is the navbar========================= -->
@@ -45,9 +49,10 @@
             </form>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="{% url 'host' %}">Host a Dinner</a></li>
                     {% if user.is_authenticated %}
+                    <li><a href="{% url 'host' %}">Host a Dinner</a></li>
                     <li><a href="{% url 'reservation' %}">Dinners I'm Going To</a></li>
+                    <li><a href="{% url 'myevents' %}">Dinners I'm Hosting</a></li>
                     {% endif %}
                     <li><a href="{% url 'events' %}">Join a Dinner</a></li>
                 </ul>
@@ -76,10 +81,6 @@
         </div><!-- /.container-fluid -->
     </nav>
     <!-- ============================This is the navbar========================= -->
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{%  static 'js/bootstrap.min.js' %}"></script>
 
     {% block body %}
     {% endblock %}

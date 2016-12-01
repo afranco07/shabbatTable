@@ -180,7 +180,6 @@ def reservation(request):
         Reservation.objects.get(event=evnt, guest=userobj).delete()
 
     context_dict = {}
-    context_dict['events'] = Event.objects.all()
     reservations = Reservation.objects.filter(guest=userobj)
     context_dict['reservations'] = [x for x in reservations]
     return render(request, 'frijay/reservation.html', context_dict)

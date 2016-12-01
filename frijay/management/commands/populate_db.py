@@ -14,7 +14,7 @@ class Command(BaseCommand):
         users.delete()
 
 
-    def __clear_events(self):
+    def _clear_events(self):
         events = Event.objects.all()
         events.delete()
 
@@ -185,7 +185,7 @@ class Command(BaseCommand):
         print("Clearing users...")
         self._clear_users()
         print("Clearing events...")
-        self.__clear_events()
+        self._clear_events()
         print("Populating users...")
         self._populate_users()
         print("Populating events...")

@@ -17,7 +17,11 @@
             <img src="{% static "images/image2.jpg" %}" alt="My image" />
             <div class="caption">
                  <a style="text-decoration:None;display:block;" href="/frijay/events/{{event.id}}"><div class="well well-sm">
+                 {% if event.title|length <  26 %}
                     <h3>{{event.title}}</h3>
+                    {% else %}
+                    <h3>{{ event.title|truncatechars:19}}</h3>
+                    {% endif %}
                     <p><b>Location: </b>{{ event.city }}</p>
                     <p><b>Date: </b>{{ event.date }}</p>
                     {% if event.openSeats > 0 %}
@@ -60,6 +64,7 @@
             </div>
         </div>
     </div>
+
 {% endfor %}
      <div style="clear:both"></div>
 

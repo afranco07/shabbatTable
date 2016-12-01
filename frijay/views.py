@@ -13,7 +13,8 @@ from frijay.forms import UserForm, UserProfileForm, EventForm
 
 def index(request):
     '''index page view'''
-    context_dict = {'title': "Frijay!"}
+    Events = Event.objects.all()
+    context_dict = {'title': "Frijay!",'Events':Events}
     return render(request, 'frijay/index.html', context_dict)
 
 

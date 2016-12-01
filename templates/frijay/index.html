@@ -30,57 +30,21 @@
 
 <br><br>
 <hr class="featurette-divider">
-
-<div class="row">
+{% autoescape off %}
+{% for event in Events %}
     <div class="col-sm-4 col-md-3">
         <div class="thumbnail">
             <img src="{% static "images/image2.jpg" %}" alt="My image" />
             <div class="caption">
-                <h3>Event 1</h3>
-                <p>Date</p>
-                <p>Time</p>
-                <p>Number of people attending</p>
-                <p><a href="#" class="btn btn-primary" role="button">Reserve</a></p>
+                <a href="/frijay/events/{{event.id}}" style="text-decoration: none">
+                    <h3>{{event.title}}</h3></a>
+                    <p><b>Host: </b>{{event.host}}</p>
+                    <p><b>Location: </b>{{ event.city }}</p>
+                     <p><b>Date: </b>{{ event.date }}</p>
+                    <h5>Open Seats: <span class="badge">{{ event.openSeats }}</span></h5>
             </div>
         </div>
     </div>
-        <div class="col-sm-4 col-md-3">
-        <div class="thumbnail">
-            <img src="{% static "images/image3.jpg" %}" alt="My image" />
-            <div class="caption">
-                <h3>Event 2</h3>
-                <p>Date</p>
-                <p>Time</p>
-                <p>Number of people attending</p>
-                <p><a href="#" class="btn btn-primary" role="button">Reserve</a> </p>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-4 col-md-3">
-        <div class="thumbnail">
-            <img src="{% static "images/image6.jpg" %}" alt="My image" />
-            <div class="caption">
-                <h3>Event 3</h3>
-                <p>Date</p>
-                <p>Time</p>
-                <p>Number of people attending</p>
-                <p><a href="#" class="btn btn-primary" role="button">Reserve</a></p>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-4 col-md-3">
-        <div class="thumbnail">
-            <img src="{% static "images/image7.jpg" %}" alt="My image" />
-            <div class="caption">
-                <h3>Event 4</h3>
-                <p>Date</p>
-                <p>Time</p>
-                <p>Number of people attending</p>
-                <p><a href="#" class="btn btn-primary" role="button">Reserve</a></p>
-            </div>
-        </div>
-    </div>
-</div>
-
-
+{% endfor %}
+{% endautoescape %}
 {% endblock %}

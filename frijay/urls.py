@@ -9,7 +9,6 @@ urlpatterns = [
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^signup/', views.signup, name='signup'),
     url(r'^profile/', views.profile, name='profile'),
-    url(r'^.well-known/acme-challenge/eReWBQ7S1xVgd2si8FrfP4hHhZO3vtXQjctnzZZ70HM', views.test, name='test'),
     #reservations page
     url(r'^events/$', views.events, name='events'),
     url(r'^myevents/$', views.myevents, name='myevents'),

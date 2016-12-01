@@ -20,8 +20,5 @@ from frijay import views as fview
 
 urlpatterns = [
     url(r'^', include('frijay.urls')),
-    # above maps any URLs starting with frijay/
-    # to be handled by the frijay application (see frijay/urls.py)
-    #above maps root (domain.com/) to fview.redir.
     url(r'^admin/', admin.site.urls),
 ]

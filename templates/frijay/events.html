@@ -9,15 +9,19 @@
 {% block body %}
 <br>
 <br>
-<h1>Events</h1>
+<h1 style="font-family: 'Raleway', sans-serif">Events</h1>
 {% autoescape off %}
 {% for event in html_list %}
     <div class="col-sm-4 col-md-3">
         <div class="thumbnail">
             <img src="{% static "images/image2.jpg" %}" alt="My image" />
             <div class="caption">
-                 <a style="text-decoration:None;display:block;" href="/frijay/events/{{event.id}}"><div class="well well-sm">
+            <a style="text-decoration:None;display:block;" href="/events/{{event.id}}"><div class="well well-sm">
+                 {% if event.title|length <  22 %}
                     <h3>{{event.title}}</h3>
+                {% else %}
+                    <h3>{{ event.title|truncatechars:22}}</h3>
+                {% endif %}
                     <p><b>Location: </b>{{ event.city }}</p>
                     <p><b>Date: </b>{{ event.date }}</p>
                     {% if event.openSeats > 0 %}
@@ -60,6 +64,7 @@
             </div>
         </div>
     </div>
+
 {% endfor %}
      <div style="clear:both"></div>
 

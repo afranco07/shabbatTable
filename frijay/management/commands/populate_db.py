@@ -5,24 +5,19 @@ from django.contrib.auth.models import User
 
 class Command(BaseCommand):
     args = '<foo bar ...>'
-    help = 'our help string comes here'
-
-
 
     def _clear_users(self):
         users = User.objects.exclude(username="frijay")
         users.delete()
 
-
     def _clear_events(self):
         events = Event.objects.all()
         events.delete()
 
-
     def _populate_users(self):
         users = [
             {
-                "username": 'jonathanrozario', # user for debugging
+                "username": 'jonathanrozario',  # user for debugging
                 "password": "qwerty",
                 "first_name": "Jonathan",
                 "last_name": "Rozario",
@@ -90,6 +85,20 @@ class Command(BaseCommand):
                 "first_name": "frank",
                 "last_name": "delgado",
                 "email": "spaceys_palace@mail.com"
+            },
+            {
+                "username": 'JessBests',
+                "password": "snowden12345",
+                "first_name": "Jessica",
+                "last_name": "Betts",
+                "email": "talthausy@mail.ru"
+            },
+            {
+                "username": 'b0ss',
+                "password": "fff@n",
+                "first_name": "Joji",
+                "last_name": "Miller",
+                "email": "p1nkman@hotmail.com"
             }
         ]
 
@@ -162,6 +171,36 @@ class Command(BaseCommand):
                 "time2": "22:00:00",
                 "openSeats": 3,
                 "additionalDetails": "Let's have shabbat!"
+            },
+            {
+                "title": "Make Shabbat Great Again",
+                "address": "17 Jackson Ave",
+                "address2": "Floor B",
+                "city": "Queens",
+                "state": "NY",
+                "zipcode": "11345",
+                "host": User.objects.get_by_natural_key("Jottav"),
+                "phone": 5163133881,
+                "date": "2017-1-25",
+                "time1": "19:30:00",
+                "time2": "23:00:00",
+                "openSeats": 4,
+                "additionalDetails": "Because why not? Come join for festivities and Make Shabbat Great Again! Family dinner open to couples and individuals of all ages. We don't discrminate!"
+            },
+            {
+                "title": "Veggies Delight",
+                "address": "4225 Carle Pl.",
+                "address2": "F",
+                "city": "Bronx",
+                "state": "NY",
+                "zipcode": "15344",
+                "host": User.objects.get_by_natural_key("vl02nf"),
+                "phone": 5163133881,
+                "date": "2017-1-25",
+                "time1": "17:30:00",
+                "time2": "19:00:00",
+                "openSeats": 1,
+                "additionalDetails": "Good vegetarian and tasty dinner! Homemade by everyone in the family :)"
             }
         ]
 
@@ -177,8 +216,8 @@ class Command(BaseCommand):
                 phone=e['phone'],
                 date=e['date'],
                 time1=e['time1'],
-                time2=e['time2'], 
-				openSeats=e['openSeats'],
+                time2=e['time2'],
+                openSeats=e['openSeats'],
                 additionalDetails=e['additionalDetails'])[0]
             c.save()
 

@@ -24,30 +24,41 @@ class viewsTest(TestCase):
 
     '''Test the index.html page'''
     def test_indexPage(self):
-        response = self.client.get("/frijay/")
+        response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
 
     '''Test the reservation.html page'''
     def test_reservationPage(self):
-        response = self.client.get("/frijay/reservations/")
+        response = self.client.get("/reservations/")
         self.assertEqual(response.status_code, 200)
 
     '''Test the events.html page'''
     def test_eventsPage(self):
-        response = self.client.get("/frijay/events/")
+        response = self.client.get("/events/")
         self.assertEqual(response.status_code, 200)
 
     '''Test the about.html page'''
     def test_aboutPage(self):
-        response = self.client.get("/frijay/about/")
+        response = self.client.get("/about/")
         self.assertEqual(response.status_code, 200)
 
     '''Test the login.html page'''
     def test_loginPage(self):
-        response = self.client.get("/frijay/login")
+        response = self.client.get("/login/")
         self.assertEqual(response.status_code, 200)
 
     '''Test the signup.html'''
     def test_signUpPage(self):
-        response = self.client.get("/frijay/signup/")
+        response = self.client.get("/signup/")
         self.assertEqual(response.status_code, 200)
+
+    def test_login(self):
+        user = User.objects.create(username='alberto')
+        user.set_password('frijay')
+        user.save()
+
+        #self.client.login(username='alberto', password='frijay')
+
+        response = self.client.post('/login/', username='frijay', password='frijay_pass', follow = True)
+
+        self.assertTrue(response.context['user'].is_active)

@@ -45,14 +45,6 @@ class UserForm(forms.ModelForm):
         return data
 
 
-# class UserProfileForm(forms.ModelForm):
-#     """Form for user profile"""
-#     class Meta:
-#         """Connects UserProfile to the model UserProfile"""
-#         model = UserProfile
-#         fields = ('picture',)
-
-
 class EventForm(forms.ModelForm):
     """ Form to Host a Dinner. Host name selected in the views. """
     title = forms.CharField(label="Title *",

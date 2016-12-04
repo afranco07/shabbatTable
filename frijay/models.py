@@ -3,18 +3,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class UserProfile(models.Model):
-    '''Links UserProfile to a User model instance.'''
-    user = models.OneToOneField(User)
-
-    # The additional attributes we wish to include.
-    picture = models.ImageField(upload_to='profile_images', blank=True)
-
-    def __str__(self):
-        '''Return username of the user'''
-        return self.user
-
-
 class Event(models.Model):
     '''A model for event attended by users'''
     title = models.CharField(max_length=80, unique=True)

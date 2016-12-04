@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta
 from django import forms
 from django.contrib.auth.models import User
-from frijay.models import UserProfile, Event
+from frijay.models import Event
 
 
 class UserForm(forms.ModelForm):
@@ -45,12 +45,12 @@ class UserForm(forms.ModelForm):
         return data
 
 
-class UserProfileForm(forms.ModelForm):
-    """Form for user profile"""
-    class Meta:
-        """Connects UserProfile to the model UserProfile"""
-        model = UserProfile
-        fields = ('picture',)
+# class UserProfileForm(forms.ModelForm):
+#     """Form for user profile"""
+#     class Meta:
+#         """Connects UserProfile to the model UserProfile"""
+#         model = UserProfile
+#         fields = ('picture',)
 
 
 class EventForm(forms.ModelForm):

@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from frijay.models import Event, Reservation
-from frijay.forms import UserForm, UserProfileForm, EventForm
+from frijay.forms import UserForm, EventForm
 from frijay.twilio import send_reservation_sms
 
 
@@ -36,32 +36,15 @@ def signup(request):
         # Attempt to grab information from the raw form information.
         # Note that we make use of only the UserForm
         user_form = UserForm(data=request.POST)
-        profile_form = UserProfileForm(data=request.POST)
 
         # If the two forms is valid...
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid():
             user = user_form.save()
 
             # Now we hash the password with the set_password method.
             # Once hashed, we can update the user object.
             user.set_password(user.password)
             user.save()
-
-            # Now sort out the UserProfile instance.
-            # Since we need to set the user attribute ourselves,
-            # we set commit=False. This delays saving the model
-            # until we're ready to avoid integrity problems.
-            profile = profile_form.save(commit=False)
-            profile.user = user
-
-            # Did the user provide a profile picture?
-            # If so, we need to get it from the input form and
-            # put it in the UserProfile model.
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
-
-            # Now we save the UserProfile model instance.
-            profile.save()
 
             # Update our variable to indicate that the template
             # registration was successful.
@@ -70,17 +53,15 @@ def signup(request):
         else:
             # Invalid form or forms - mistakes or something else?
             # Print problems to the terminal.
-            print(user_form.errors, profile_form.errors)
+            print(user_form.errors)
     else:
         # Not a HTTP POST, so we render our form using two ModelForm instances.
         # These forms will be blank, ready for user input.
         user_form = UserForm()
-        profile_form = UserProfileForm()
 
     # Render the template depending on the context.
     return render(request, 'frijay/signup.html',
                   {'user_form': user_form,
-                   'profile_form': profile_form,
                    'registered': registered})
 
 

@@ -150,6 +150,6 @@ input[type=text]:focus {
 .thumbnail.index{
     height:320px;
 }
-.thumbnail{
+.thumbnail.event{
     height: 450px;
 }

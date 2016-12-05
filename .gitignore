@@ -7,4 +7,4 @@ venv/
 frijay/migrations/*
 !frijay/migrations/__init__.py
 ~
-htmlcov
+coverage_html_report

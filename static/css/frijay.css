@@ -69,3 +69,17 @@ input[type=text]:focus {
   color: black;
   font-weight: 300;
 }
+.hovereffect {
+  text-align: center;
+    font-family: Raleway, sans-serif;
+    color: #e6e6e6;
+}
+.overlay a{
+    font-family: 'Quicksand', sans-serif;
+    font-size: large;
+    color: #FFFFFF;
+}
+.hovereffect h3{
+    color:#D9534F;
+    font-family: 'Quicksand', sans-serif;
+}

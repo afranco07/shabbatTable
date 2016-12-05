@@ -1,14 +1,18 @@
-'''Unittests for the frijay app'''
-from django.contrib.auth.models import User
-from django.test import TestCase
+"""Unittests for the frijay app
+
+Models to be tested: Event,
+"""
+import unittest
+from unittest.mock import Mock
 from frijay.models import Event
 
 
 # Create your tests here.
-class EventModelTest(TestCase):
-    '''Testing the Event Model'''
+class UnittestEventModel(unittest.TestCase):
+    """Unittests for the Event Model"""
 
-    def test_string_representation(self):
-        '''Test __str__ method for Event'''
-        event = Event(title="My title")
-        self.assertEqual(str(event), event.title)
+    def test_mock_string_representation(self):
+        """Unit test the string representation"""
+        mock_instance = Mock(spec=Event)
+        mock_instance.title = "My title"
+        self.assertEqual(Event.__str__(mock_instance), "My title")

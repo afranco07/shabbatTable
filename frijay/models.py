@@ -1,22 +1,16 @@
-'''Models for the frijay app are created here. '''
+'''Models for the frijay app are created here.
+
+Models created:
+Event: a dinner event that is hosted/joined by people
+Reservation: a reservation for a dinner event, only accessible to
+authenticated users
+'''
 from django.db import models
 from django.contrib.auth.models import User
 
 
-class UserProfile(models.Model):
-    '''Links UserProfile to a User model instance.'''
-    user = models.OneToOneField(User)
-
-    # The additional attributes we wish to include.
-    picture = models.ImageField(upload_to='profile_images', blank=True)
-
-    def __str__(self):
-        '''Return username of the user'''
-        return self.user.username
-
-
 class Event(models.Model):
-    '''A model for event attended by users'''
+    """A model for event attended by users"""
     title = models.CharField(max_length=80, unique=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     modified_at = models.DateTimeField(auto_now=True, editable=False)
@@ -37,15 +31,18 @@ class Event(models.Model):
                                          null=True)
 
     def __str__(self):
-        '''Makes the string representation
-        equal to the title of the Event'''
+        """Makes the string representation equal to the title of the Event"""
         return self.title
 
 
 class Reservation(models.Model):
+    """Model for a reservation to a dinner"""
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     guest = models.ForeignKey(User, on_delete=models.CASCADE)
     accept = models.NullBooleanField(null=True, default=None)
 
     def __str__(self):
+        """Makes the string representation equal to the title of the
+        event for which the reservation is being made.
+        """
         return self.event.name

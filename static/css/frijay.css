@@ -147,3 +147,9 @@ input[type=text]:focus {
         overflow: hidden!important;
     }
 }
+.thumbnail.index{
+    height:320px;
+}
+.thumbnail{
+    height: 450px;
+}

@@ -36,11 +36,12 @@
         <div class="thumbnail">
             <img src="{% static "images/image2.jpg" %}" alt="My image" />
             <div class="caption">
-                <a href="/events/{{event.id}}" style="text-decoration: none">
                 {% if event.title|length <  22 %}
-                    <h3>{{event.title}}</h3></a>
+                    <a href="/events/{{event.id}}" style="text-decoration: none"><h3>{{event.title}}</h3></a>
+                <h4>{{event.city}}</h4>
                 {% else %}  
-                    <h3>{{ event.title|truncatechars:22}}</h3>
+                    <a href="/events/{{event.id}}" style="text-decoration: none"> <h3>{{ event.title|truncatechars:22}}</h3></a>
+                 <h4>{{event.city}}</h4>
                 {% endif %}
                     <p><b>Host: </b>{{event.host}}</p>
                     <p><b>Location: </b>{{ event.city }}</p>

@@ -33,6 +33,7 @@
 {% autoescape off %}
 {% for event in Events %}
     <div class="col-sm-4 col-md-3">
+        <div class="hovereffect">
         <div class="thumbnail">
             <img src="{% static "images/image2.jpg" %}" alt="My image" />
             <div class="caption">
@@ -43,10 +44,14 @@
                     <a href="/events/{{event.id}}" style="text-decoration: none"> <h3>{{ event.title|truncatechars:22}}</h3></a>
                  <h4>{{event.city}}</h4>
                 {% endif %}
+                </div>
+            </div>
+            <div class="overlay">
                     <p><b>Host: </b>{{event.host}}</p>
                     <p><b>Location: </b>{{ event.city }}</p>
                      <p><b>Date: </b>{{ event.date }}</p>
                     <h5>Open Seats: <span class="badge">{{ event.openSeats }}</span></h5>
+                <a href="/events/{{event.id}}" style="text-decoration: none"> More Details </a>
             </div>
         </div>
     </div>

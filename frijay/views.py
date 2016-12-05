@@ -12,7 +12,7 @@ from frijay.twilio import send_reservation_sms
 
 def index(request):
     '''index page view'''
-    events = Event.objects.all.filter(openSeats__gt=0)[:4]
+    events = Event.objects.filter(openSeats__gt=0)[:4]
     context_dict = {'title': "Frijay!", 'Events':events}
     return render(request, 'frijay/index.html', context_dict)
 

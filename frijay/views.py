@@ -236,3 +236,10 @@ def reservationsEvent(request, event_id):
                     'event_details' : eventModel.additionalDetails
                    }
     return render(request, 'frijay/reservationEventPage.html', context_dict)
+
+
+def howItWorks(request):
+    '''howitworks page view to show user documentation'''
+    context_dict = {'title': "HowItWorks"}
+
+    return render(request, 'frijay/howItWorks.html', context_dict)

@@ -4,13 +4,8 @@ from django.test import Client
 
 class ViewsTest(TestCase):
 
+    '''Creates the User, and tests if they can login'''
     def setUp(self):
-        user = User.objects.create_user('bob', '', 'temp')
-        user.set_password('temp')
-        self.client.login(username='bob', password='temp')
-        self.assertTrue(user.is_authenticated())
-
-    def test_login(self):
         user = User.objects.create_user('bob', '', 'temp')
         user.set_password('temp')
         self.client.login(username='bob', password='temp')
@@ -25,8 +20,6 @@ class ViewsTest(TestCase):
     '''Test the reservation.html page'''
     def test_reservationPage(self):
         """Tests the reservations page """
-        user = User.objects.create_user('bob', '', 'temp')
-        user.set_password('temp')
         self.client.login(username='bob', password='temp')
         response = self.client.get("/reservations/")
         self.assertEqual(response.status_code, 200)
@@ -57,16 +50,12 @@ class ViewsTest(TestCase):
 
     '''Tests the host.html page'''
     def test_hostDinner(self):
-        user = User.objects.create_user('bob', '', 'temp')
-        user.set_password('temp')
         self.client.login(username='bob', password='temp')
         response = self.client.get("/host/")
         self.assertEqual(response.status_code, 200)
 
     '''Test the myevents.html'''
     def test_reservations(self):
-        user = User.objects.create_user('bob', '', 'temp')
-        user.set_password('temp')
         self.client.login(username='bob', password='temp')
         response = self.client.get("/myevents/")
         self.assertEqual(response.status_code, 200)

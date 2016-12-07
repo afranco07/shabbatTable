@@ -73,3 +73,20 @@ class ViewsTest(TestCase):
     def test_no_events(self):
         response = self.client.get('/')
         self.assertContains(response, 'Sorry, no events right now :( Please come back later.')
+
+    '''Test whether events show up on Events page'''
+
+    '''Adding one event and testing whether it will show up on the events page'''
+    def test_one_event_eventpage(self):
+        Event.objects.create(title='Shabbat', address='testaddress', city='Brooklyn', state='New York',
+                             phone='1231231234', date='2016-12-07', time1='03:24:12', time2="03:24:12",
+                             openSeats='10', additionalDetails='None')
+        response = self.client.get('/events/')
+        self.assertContains(response, 'Shabbat')
+        self.assertContains(response, 'Brooklyn')
+        self.assertContains(response, '10')
+
+    '''Testing the events page on no events in Database'''
+    def test_no_events_eventspage(self):
+        response = self.client.get('/events/')
+        self.assertContains(response, 'Sorry, no events right now :( Please come back later.')

@@ -46,6 +46,7 @@ class ViewsTest(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create(username='some_user')
 
+    '''Adding one event and testing whether it will show up on the featured events on index page'''
     def test_one_event(self):
         Event.objects.create(title='Shabbat',address='testaddress',city='Brooklyn',state='New York',
                              phone='1231231234',date='2016-12-07',time1='03:24:12',time2="03:24:12",
@@ -55,6 +56,7 @@ class ViewsTest(TestCase):
         self.assertContains(response, 'Brooklyn')
         self.assertContains(response, '10')
 
+    '''Adding two events and testing whether they will show up on the featured events on index page'''
     def test_two_events(self):
         Event.objects.create(title='Frijay', address='testaddress2', city='Queens', state='New York',
                              phone='1233213221', date='2016-12-07', time1='03:24:12', time2="03:24:12",
@@ -66,3 +68,8 @@ class ViewsTest(TestCase):
         self.assertContains(response, 'Frijay')
         self.assertContains(response, 'Queens')
         self.assertContains(response, '2')
+
+    '''Testing will the output print statment will show up upon no events in the database'''
+    def test_no_events(self):
+        response = self.client.get('/')
+        self.assertContains(response, 'Sorry, no events right now :( Please come back later.')

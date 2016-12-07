@@ -87,7 +87,7 @@ input[type=text]:focus {
   position: absolute;
   overflow: hidden;
   width: 80%;
-  height: 45%;
+  height: 43%;
   left: 10%;
   top: 10%;
   border-bottom: 1px solid #FFF;
@@ -146,4 +146,10 @@ input[type=text]:focus {
     .collapsing {
         overflow: hidden!important;
     }
+}
+.thumbnail.index{
+    height:320px;
+}
+.thumbnail.event{
+    height: 450px;
 }

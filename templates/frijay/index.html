@@ -45,7 +45,7 @@
         <div class="thumbnail index">
             <img src="{% static "images/image2.jpg" %}" alt="My image" />
             <div class="caption">
-                {% if event.title|length <  40 %}
+                {% if event.title|length <  30 %}
                     <a href="/events/{{event.id}}" style="text-decoration: none"><h3>{{event.title}}</h3></a>
                 <h4>{{event.city}}</h4>
                 {% else %}  
@@ -63,6 +63,12 @@
             </div>
         </div>
     </div>
+{% empty %}
+<div class="container">
+    <div class="row">
+        <p>Sorry, no events right now :( Please come back later.</p>
+    </div>
+</div>
 {% endfor %}
 {% endautoescape %}
 {% endblock %}

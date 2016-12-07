@@ -1,6 +1,6 @@
 {% extends 'frijay/base.html' %}
 {% load staticfiles %}
-{% block title %}Events Page{% endblock %}
+{% block title %}Event Details{% endblock %}
 
 {% block body %}
 {% autoescape off %}
@@ -35,8 +35,8 @@
                 </div>
               {% else %}
               <center>
-<h1>Please sign up to view event's details</h1>
-        <p><a class="btn btn-danger btn-md" href="{% url 'signup' %}" role="button">Sign Up</a></p>
+<h1>Please sign in to view event's details</h1>
+        <p><a class="btn btn-danger btn-md" href="{% url 'login' %}" role="button">Login</a></p>
    </center>
 
     {% endif %}

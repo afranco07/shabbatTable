@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.test import Client
+from frijay.forms import UserForm
 
 class ViewsTest(TestCase):
 
@@ -16,6 +17,8 @@ class ViewsTest(TestCase):
         """Tests the landing page"""
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
+        searchResponse = self.client.post('/', {'search' : 'queens'})
+        self.assertEqual(searchResponse.status_code, 200)
 
     '''Test the reservation.html page'''
     def test_reservationPage(self):
@@ -46,7 +49,20 @@ class ViewsTest(TestCase):
     def test_signUpPage(self):
         """Tests the signup page"""
         response = self.client.get("/signup/")
+
         self.assertEqual(response.status_code, 200)
+
+        data ={'first_name' : "bob",
+                      'last_name' : "franklin",
+                      'username' : "bobf",
+                      'email' : "bob@mail.com",
+                      'password' : "temp"}
+
+        formResponse = self.client.post('/signup/', data)
+        self.assertEqual(formResponse.status_code, 200)
+        form = UserForm(data)
+        #self.assertTrue(form.is_valid())
+
 
     '''Tests the host.html page'''
     def test_hostDinner(self):

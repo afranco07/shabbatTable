@@ -54,10 +54,10 @@ def signup(request):
             # registration was successful.
             registered = True
 
-        else:
+        # else:
             # Invalid form or forms - mistakes or something else?
             # Print problems to the terminal.
-            print(user_form.errors)
+            # print(user_form.errors)
     else:
         # Not a HTTP POST, so we render our form using two ModelForm instances.
         # These forms will be blank, ready for user input.
@@ -85,15 +85,15 @@ def user_login(request):
                 # We'll send the user back to the homepage.
                 login(request, user)
                 return HttpResponseRedirect(reverse('index'))
-            else:
+            # else:
                 # An inactive account was used - no logging in!
-                return HttpResponse("Your account is disabled.")
+                # return HttpResponse("Your account is disabled.")
 
         # No user # with matching credentials was found.
-        else:
+        # else:
             # Bad login details were provided. So we can't log the user in.
-            print("Invalid login details: {0}, {1}".format(username, password))
-            return HttpResponse("Invalid login details supplied.")
+            # print("Invalid login details: {0}, {1}".format(username, password))
+            # return HttpResponse("Invalid login details supplied.")
             # The request is not a HTTP POST, so display the login form.
             # This scenario would most likely be a HTTP GET.
     else:
@@ -192,7 +192,7 @@ def myevents(request):
     This will allow hosts to accept or decline reservation
     requests from users.'''
     if request.method == "POST":
-        print(request.body)
+        # print(request.body)
         if request.POST.get('cancel'):
             Event.objects.get(title=request.POST.get('cancel')).delete()
         elif request.POST.get('approve'):

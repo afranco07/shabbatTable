@@ -4,10 +4,11 @@
 
 branch = True
 omit =
-    # omit anything in venv directory
+    # omit anything in these directories
     */venv/*
-    # omit any __init__.py file anywhere
     */__init__.py
+    */twilio.py
+    */migrations/*
 
 
 [report]
@@ -24,6 +25,7 @@ omit =
     # omit any __init__.py file anywhere
     */__init__.py
     */twilio.py
+    */migrations/*
 
 # Regexes for lines to exclude from consideration
 exclude_lines =

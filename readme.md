@@ -5,19 +5,21 @@ To run the server on local instance, run
 python manage.py runserver
 ```
 
-
-In addition, server can be launched via gunicorn using the command 
+On production, this website should be launched using gunicorn.
 ```
 #!bash
 
 gunicorn shabbattable.wsgi
 ```
-To use gunicorn, do 
+Be sure to use virtualenv when working with libraries from this project. Sync your pip with
+
 ```
 #!bash
 
-pip install gunicorn
+pip install -r requirements.txt
 ```
+
+In addition, developer documentation can be found on the wiki.
 
 
 The admin panel can be reached at 127.0.0.1:8000/admin/

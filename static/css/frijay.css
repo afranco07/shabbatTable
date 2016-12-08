@@ -167,3 +167,14 @@ input[type=text]:focus {
      width: 304px;
     height: 236px;
 }
+.jumbotron.howitworks h1{
+    padding-top: 150px;
+    font-family: 'Josefin Sans', sans-serif;
+    text-align: center;
+}
+.container.guest{
+    margin-bottom:10px;
+    text-align: center;
+    background-color: #bbbbbb;
+    width: 100%;
+}

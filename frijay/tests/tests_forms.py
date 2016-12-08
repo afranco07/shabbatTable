@@ -1,11 +1,17 @@
-from datetime import datetime, timedelta
-from django import forms
-from django.contrib.auth.models import User
+'''Testing forms'''
+# from datetime import datetime, timedelta
+# from django import forms
+# from django.contrib.auth.models import User
 from django.test import TestCase
 from frijay.forms import UserForm, EventForm
 
+"""Testing the two forms with input data"""
+
 
 class FormsTest(TestCase):
+
+    """Testing the event form by filling form with data"""
+
     def test_valid_data_user(self):
         form = UserForm({
             'first_name': "Avi",
@@ -22,6 +28,7 @@ class FormsTest(TestCase):
         self.assertEqual(check.email, "avikirschenbaum@gmail.com")
         self.assertEqual(check.password, "ABC123")
 
+    '''Testing the event form by filling form with data'''
     def test_valid_data_event(self):
         form = EventForm({
             'title': "Shabbat Table",

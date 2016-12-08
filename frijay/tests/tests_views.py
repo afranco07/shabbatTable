@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.test import Client, TestCase
 from frijay.models import Event
+from bs4 import BeautifulSoup
 
 class ViewsTest(TestCase):
     """Tests all functions in views.py"""
@@ -151,20 +152,22 @@ class ViewsTest(TestCase):
             time2="03:24:12",
             openSeats='10',
             additionalDetails='None', )
-
-
-    def test_one_event(self):
-        """Adding one event and testing whether it will show up
-            on the featured events on index page"""
-        Event.objects.create(title='Shabbat', address='testaddress',
-                             city='Brooklyn', state='New York',
-                             phone='1231231234', date='2016-12-07',
-                             time1='03:24:12', time2="03:24:12",
-                             openSeats='10', additionalDetails='None')
         response = self.client.get('/')
-        self.assertContains(response, 'Shabbat')
-        self.assertContains(response, 'Brooklyn')
-        self.assertContains(response, '10')
+        html = response.content
+        html = BeautifulSoup(html, "html.parser")
+        self.assertEquals(html.title.string, 'Frijay')
+        for x in response.context:
+            self.assertEquals(x['Events'][0].title, 'Shabbat')
+            self.assertEquals(x['Events'][0].address, 'testaddress')
+            self.assertEquals(x['Events'][0].city, 'Brooklyn')
+            self.assertEquals(x['Events'][0].state, 'New York')
+            self.assertEquals(x['Events'][0].phone, 1231231234)
+        event_box = html.body.find(attrs={"class": "hovereffect"})
+        self.assertEquals(event_box.h3.string, 'Shabbat')
+        self.assertEquals(event_box.h4.string, 'Brooklyn')
+        self.assertEqual(event_box.select_one("p:nth-of-type(3)").text, 'Date: Dec. 7, 2016')
+        self.assertEquals(event_box.h5.text, 'Open Seats: 10')
+
 
     def test_two_events(self):
         """Adding two events and testing whether they will show up on the
@@ -175,7 +178,7 @@ class ViewsTest(TestCase):
             city='Queens',
             state='New York',
             phone='1233213221',
-            date='2016-12-07',
+            date='2016-12-09',
             time1='03:24:12',
             time2="03:24:12",
             openSeats='2',
@@ -192,9 +195,31 @@ class ViewsTest(TestCase):
             openSeats='10',
             additionalDetails='None', )
         response = self.client.get('/')
-        self.assertContains(response, 'Frijay')
-        self.assertContains(response, 'Queens')
-        self.assertContains(response, '2')
+        html = response.content
+        html = BeautifulSoup(html, "html.parser")
+        self.assertEquals(html.title.string, 'Frijay')
+        for x in response.context:
+            self.assertEquals(x['Events'][0].title, 'Frijay')
+            self.assertEquals(x['Events'][0].address, 'testaddress2')
+            self.assertEquals(x['Events'][0].city, 'Queens')
+            self.assertEquals(x['Events'][0].state, 'New York')
+            self.assertEquals(x['Events'][0].phone, 1233213221)
+
+            self.assertEquals(x['Events'][1].title, 'Shabbat')
+            self.assertEquals(x['Events'][1].address, 'testaddress')
+            self.assertEquals(x['Events'][1].city, 'Brooklyn')
+            self.assertEquals(x['Events'][1].state, 'New York')
+            self.assertEquals(x['Events'][1].phone, 1231231234)
+
+        event_box = html.body.find_all(attrs={"class": "hovereffect"})
+        self.assertEquals(event_box[0].h3.string, 'Frijay')
+        self.assertEquals(event_box[0].h4.string, 'Queens')
+        self.assertEqual(event_box[0].select_one("p:nth-of-type(3)").text, 'Date: Dec. 9, 2016')
+        self.assertEquals(event_box[0].h5.text, 'Open Seats: 2')
+        self.assertEquals(event_box[1].h3.string, 'Shabbat')
+        self.assertEquals(event_box[1].h4.string, 'Brooklyn')
+        self.assertEqual(event_box[1].select_one("p:nth-of-type(3)").text, 'Date: Dec. 7, 2016')
+        self.assertEquals(event_box[1].h5.text, 'Open Seats: 10')
 
     def test_no_events(self):
         """Testing will the output print statment will show up
@@ -203,10 +228,9 @@ class ViewsTest(TestCase):
         error_msg = 'Sorry, no events right now :( Please come back later.'
         self.assertContains(response, error_msg)
 
+
     def test_one_event_eventpage(self):
-        """Test whether events show up on Events page
-        Adding one event and testing whether it will show up
-        on the events page"""
+        """Adding one event and testing whether it will show up on the events page"""
         Event.objects.create(
             title='Shabbat',
             address='testaddress',
@@ -218,18 +242,6 @@ class ViewsTest(TestCase):
             time2="03:24:12",
             openSeats='10',
             additionalDetails='None', )
-        """Testing will the output print statment will show up upon
-            no events in the database"""
-        response = self.client.get('/')
-        self.assertContains(response, 'Sorry, no events right now :( Please come back later.')
-
-    def test_one_event_eventpage(self):
-        """Adding one event and testing whether it will show up on the events page"""
-        Event.objects.create(title='Shabbat', address='testaddress',
-                             city='Brooklyn', state='New York',
-                             phone='1231231234', date='2016-12-07',
-                             time1='03:24:12', time2="03:24:12",
-                             openSeats='10', additionalDetails='None')
         response = self.client.get('/events/')
         self.assertContains(response, 'Shabbat')
         self.assertContains(response, 'Brooklyn')

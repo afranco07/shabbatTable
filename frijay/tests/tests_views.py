@@ -80,6 +80,12 @@ class ViewsTest(TestCase):
         response = self.client.get("/myevents/")
         self.assertEqual(response.status_code, 200)
 
+    '''Test the Howitworks.html'''
+
+    def test_howItWorks(self):
+        """Tests the about page"""
+        response = self.client.get("/howitworks/")
+        self.assertEqual(response.status_code, 200)
 
     """Test whether our events show up on the homepage"""
     '''Adding one event and testing whether it will show up on the featured events on index page'''

@@ -28,19 +28,19 @@ class TestPages(TestCase):
     def test_homepageTitle(self):
         html = urlopen('https://shabbattable.herokuapp.com/').read()
         soup = BeautifulSoup(html, 'html.parser')
-        self.assertEquals(soup.title.get_text(), ' Frijay')
+        self.assertEquals(soup.title.get_text(), 'Frijay')
 
     def test_eventTitle(self):
         html = urlopen('https://shabbattable.herokuapp.com/events/').read()
         soup = BeautifulSoup(html, 'html.parser')
-        self.assertEquals(soup.title.get_text(), ' Events Page')
+        self.assertEquals(soup.title.get_text(), 'Events Page')
 
     def test_aboutTitle(self):
         html = urlopen('https://shabbattable.herokuapp.com/about/').read()
         soup = BeautifulSoup(html, 'html.parser')
-        self.assertEquals(soup.title.get_text(), '  About Us ')
+        self.assertEquals(soup.title.get_text(), ' About Us ')
 
     def test_howWorksTitle(self):
         html = urlopen('https://shabbattable.herokuapp.com/howitworks/').read()
         soup = BeautifulSoup(html, 'html.parser')
-        self.assertEquals(soup.title.get_text(), ' How It Works')
+        self.assertEquals(soup.title.get_text(), 'How It Works')

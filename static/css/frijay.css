@@ -187,3 +187,10 @@ input[type=text]:focus {
 .howitworks.steps{
     font-size: 30px;
 }
+.thumbnail.howitworks{
+    border: none;
+}
+.thumbnail.howitworks img{
+    height: 250px;
+    border-radius: 7px;
+}

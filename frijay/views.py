@@ -116,9 +116,9 @@ def user_logout(request):
 #     return render(request, 'frijay/profile.html', context_dict)
 
 
-def redir(request):
-    '''redirection view'''
-    return redirect('/frijay')
+# def redir(request):
+#     '''redirection view'''
+#     return redirect('/frijay')
 
 
 def events(request):

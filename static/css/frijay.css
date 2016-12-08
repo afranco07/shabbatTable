@@ -154,7 +154,9 @@ input[type=text]:focus {
 }
 .jumbotron.howitworks{
     height:450px;
-    background-image: url(../images/image6.jpg);
+    background-image: url(../images/user1.jpg);
+    background-size: cover;
+    background-position:center center;
     margin: 0px;
 }
 
@@ -173,8 +175,12 @@ input[type=text]:focus {
     text-align: center;
 }
 .container.guest{
+    opacity: 0.6;
+    color: black;
     margin-bottom:10px;
     text-align: center;
-    background-color: #bbbbbb;
+    background: #bdc3c7; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #bdc3c7 , #2c3e50); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #bdc3c7 , #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     width: 100%;
 }

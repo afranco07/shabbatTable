@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^login/*', views.user_login, name='login'),
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^signup/', views.signup, name='signup'),
-    url(r'^profile/', views.profile, name='profile'),
+    # url(r'^profile/', views.profile, name='profile'),
     #reservations page
     url(r'^events/$', views.events, name='events'),
     url(r'^myevents/$', views.myevents, name='myevents'),

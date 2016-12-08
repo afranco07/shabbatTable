@@ -28,7 +28,7 @@ def about(request):
     return render(request, 'frijay/about.html', context_dict)
 
 def signup(request):
-    '''signup page view'''
+    """signup page view"""
     # A boolean value for telling the template
     # whether the registration was successful.
     # Set to False initially. Code changes value to
@@ -110,10 +110,10 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('index'))
 
 
-def profile(request):
-    '''user profile page view'''
-    context_dict = {'title': "Profile"}
-    return render(request, 'frijay/profile.html', context_dict)
+# def profile(request):
+#     '''user profile page view'''
+#     context_dict = {'title': "Profile"}
+#     return render(request, 'frijay/profile.html', context_dict)
 
 
 def redir(request):
@@ -150,9 +150,9 @@ def host_event(request):
             event.host = userObj
             event.save()
             return HttpResponseRedirect(reverse('myevents'))
-        else:
+        # else:
             # invalid form or forms TODO
-            print(event.errors)
+            # print(event.errors)
     else:
         event_form = EventForm()
     return render(request, 'frijay/host.html', {'event_form': event_form})

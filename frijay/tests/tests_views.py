@@ -80,6 +80,33 @@ class ViewsTest(TestCase):
         response = self.client.get("/myevents/")
         self.assertEqual(response.status_code, 200)
 
+    def test_reservationsEvents(self):
+        """Tests whether a specific event shows up in its own page"""
+        user = User.objects.create_user(username="abrahamlincoln",
+                                        email="lincoln@email.com",
+                                        first_name='Abraham',
+                                        last_name='Lincoln', )
+        user.set_password('password')
+        self.client.login(username='abrahamlincoln', password='password')
+        event = Event.objects.create(
+            title="Friday Dinner with the mr. president",
+            host=user,
+            address="160 Covent Ave",
+            city="New York",
+            state="NY",
+            phone="2126507000",
+            date="2017-01-02",
+            time1="05:23:00",
+            time2="07:23:00",
+            openSeats="4",
+            additionalDetails="Guests, please bring a bottle of wine.")
+        event_id = event.id
+        # TODO complete this test
+        response = self.client.get("/events/"+ str(event_id) + "/")
+        # print(dir(response))
+        # print(response._container)
+        self.assertContains(response, "Friday Dinner with the mr. president")
+        self.assertEqual(response.status_code, 200)
 
     """Test whether our events show up on the homepage"""
     '''Adding one event and testing whether it will show up on the featured events on index page'''

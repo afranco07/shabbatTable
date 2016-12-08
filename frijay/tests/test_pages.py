@@ -3,6 +3,9 @@ from bs4 import BeautifulSoup
 #from urllib import urlopen
 from urllib.request import urlopen
 
+html = urlopen('https://shabbattable.herokuapp.com/').read()
+soup = BeautifulSoup(html, 'html.parser')
+
 class TestPages(TestCase):
 
     def test_navbar_title(self):

@@ -15,7 +15,7 @@ def index(request):
     events = Event.objects.filter(openSeats__gt=0)[:4]
     if request.method == 'POST':
         events = Event.objects.filter(city__iexact=request.POST.get('search'))
-        context_dict = {'title': "Frijay!", 'Events':events }
+        context_dict = {'title': "Frijay!", 'Events':events}
         return render(request, 'frijay/index.html', context_dict)
     context_dict = {'title': "Frijay!", 'Events':events}
     return render(request, 'frijay/index.html', context_dict)
@@ -125,7 +125,8 @@ def events(request):
     '''Event View'''
     all_events = Event.objects.all()
     context_dict = {'html_list': all_events}
-    if request.POST.get('reserve') and Event.objects.get(title=request.POST.get('reserve')).openSeats > 0:
+    if request.POST.get('reserve') \
+            and Event.objects.get(title=request.POST.get('reserve')).openSeats > 0:
         user = User.objects.get(id=int(request.user.id))
         evnt = Event.objects.get(title=request.POST.get('reserve'))
         evnt.openSeats -= 1
@@ -236,3 +237,10 @@ def reservationsEvent(request, event_id):
                     'event_details' : eventModel.additionalDetails
                    }
     return render(request, 'frijay/reservationEventPage.html', context_dict)
+
+
+def howItWorks(request):
+    '''howitworks page view to show user documentation'''
+    context_dict = {'title': "HowItWorks"}
+
+    return render(request, 'frijay/howItWorks.html', context_dict)

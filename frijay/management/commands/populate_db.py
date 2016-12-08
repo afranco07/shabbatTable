@@ -125,7 +125,9 @@ class Command(BaseCommand):
                 "time1": "18:00:00",
                 "time2": "20:00:00",
                 "openSeats": 5,
-                "additionalDetails": "COME JOIN IS IT WILL BE FUN PLEASE RESREVE A SEAT COME JOIN THE SHABBAT DINNER OF 2016"
+                "additionalDetails": "COME JOIN IS IT WILL BE FUN PLEASE RESREVE "
+                                     "A SEAT COME JOIN THE SHABBAT DINNER"
+                                     " OF 2016"
             },
             {
                 "title": "Shabbattable!",
@@ -140,7 +142,11 @@ class Command(BaseCommand):
                 "time1": "19:00:00",
                 "time2": "21:00:00",
                 "openSeats": 2,
-                "additionalDetails": "Nice family dinner with the Dieplids! We'll have spots for 2 people, and have a great time! Fresh food. Guests who arrive, please bring a bottle of wine. Looking forawrd to a fun shabbat!"
+                "additionalDetails": "Nice family dinner with the Dieplids! We'll"
+                                     " have spots for 2 people, and have a "
+                                     "great time! Fresh food. Guests who arrive, "
+                                     "please bring a bottle of wine."
+                                     " Looking forawrd to a fun shabbat!"
             },
             {
                 "title": "Dinner with the Kleins",
@@ -155,7 +161,8 @@ class Command(BaseCommand):
                 "time1": "20:00:00",
                 "time2": "22:00:00",
                 "openSeats": 3,
-                "additionalDetails": "Good, cozy home cooked meal, games and dessert after :) All are welcome"
+                "additionalDetails": "Good, cozy home cooked meal, games and "
+                                     "dessert after :) All are welcome"
             },
             {
                 "title": "Dinner with my peeps",
@@ -185,7 +192,10 @@ class Command(BaseCommand):
                 "time1": "19:30:00",
                 "time2": "23:00:00",
                 "openSeats": 4,
-                "additionalDetails": "Because why not? Come join for festivities and Make Shabbat Great Again! Family dinner open to couples and individuals of all ages. We don't discrminate!"
+                "additionalDetails": "Because why not? Come join for festivities and "
+                                     "Make Shabbat Great Again! "
+                                     "Family dinner open to couples and individuals"
+                                     " of all ages. We don't discrminate!"
             },
             {
                 "title": "Veggies Delight",
@@ -200,7 +210,8 @@ class Command(BaseCommand):
                 "time1": "17:30:00",
                 "time2": "19:00:00",
                 "openSeats": 1,
-                "additionalDetails": "Good vegetarian and tasty dinner! Homemade by everyone in the family :)"
+                "additionalDetails": "Good vegetarian and tasty dinner! "
+                                     "Homemade by everyone in the family :)"
             }
         ]
 

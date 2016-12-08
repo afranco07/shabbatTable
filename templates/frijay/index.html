@@ -17,23 +17,31 @@
 
 
 
-<h3 style="text-align: center">Search For Events</h3>
+<h3 style="text-align: center; font-family: 'Raleway', sans-serif ">Search For Events</h3>
 <div class="container">
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
 
             <form class="form" role="form" method="post" action="{% url 'index' %}">
                     {% csrf_token %}
-                    <div class="form-group">
-                        <input type="text" name="search" id="id_search" class="form-control"
-                        placeholder="City">
-                    </div>
-                <button class="btn btn-lg btn-default btn-block" type="submit"
-                        value="Submit">Search</button>
-                </form>
+                     <div id="custom-search-input">
+                         <div class="input-group col-md-12">
+                        <input type="text" name="search" id="id_search" class="form-control input-lg"
+                        placeholder="City" data-toggle="tooltip"
+                        title="Search all the available events">
+                             <span class="input-group-btn">
+                <button class="btn btn-info btn-lg" type="submit" data-toggle="tooltip"
+                        title="Search all the available events">
+                        <i class="glyphicon glyphicon-search"></i></button>
+                                 </span>
+                             </div>
+                         </div>
+            </form>
         </div>
     </div>
 </div>
+
+
 
 
 <br><br>
@@ -45,7 +53,7 @@
         <div class="thumbnail index">
             <img src="{% static "images/image2.jpg" %}" alt="My image" />
             <div class="caption">
-                {% if event.title|length <  40 %}
+                {% if event.title|length <  30 %}
                     <a href="/events/{{event.id}}" style="text-decoration: none"><h3>{{event.title}}</h3></a>
                 <h4>{{event.city}}</h4>
                 {% else %}  
@@ -63,6 +71,12 @@
             </div>
         </div>
     </div>
+{% empty %}
+<div class="container">
+    <div class="row">
+        <p>Sorry, no events right now :( Please come back later.</p>
+    </div>
+</div>
 {% endfor %}
 {% endautoescape %}
 {% endblock %}

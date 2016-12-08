@@ -3,15 +3,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from frijay.models import Event, Reservation
 from frijay.forms import UserForm, EventForm
 from frijay.twilio import send_reservation_sms
 
 
 def index(request):
-    '''index page view'''
+    """ Index Page View """
     events = Event.objects.filter(openSeats__gt=0)[:4]
     if request.method == 'POST':
         events = Event.objects.filter(city__iexact=request.POST.get('search'))
@@ -22,7 +22,7 @@ def index(request):
 
 
 def about(request):
-    '''about page view'''
+    """ About Page View """
     context_dict = {'title': "About!"}
 
     return render(request, 'frijay/about.html', context_dict)
@@ -127,13 +127,12 @@ def events(request):
     context_dict = {'html_list': all_events}
     if request.POST.get('reserve') \
             and Event.objects.get(title=request.POST.get('reserve')).openSeats > 0:
-        user = User.objects.get(id=int(request.user.id))
         evnt = Event.objects.get(title=request.POST.get('reserve'))
         evnt.openSeats -= 1
         evnt.save()
         res = Reservation.objects.get_or_create(event=evnt, guest=user)[0]
         res.save()
-        send_reservation_sms(user, evnt)
+        send_reservation_sms(request.user, evnt)
 
     return render(request, 'frijay/events.html', context_dict)
 
@@ -141,14 +140,12 @@ def events(request):
 @login_required
 def host_event(request):
     """View for hosting an event"""
-    uid = request.user
-    userObj = User.objects.get(id=int(uid.id))
     if request.method == 'POST':
         event_form = EventForm(data=request.POST)
 
         if event_form.is_valid():
             event = event_form.save(commit=False)
-            event.host = userObj
+            event.host = request.user
             event.save()
             return HttpResponseRedirect(reverse('myevents'))
         # else:
@@ -161,26 +158,24 @@ def host_event(request):
 
 @login_required
 def reservation(request):
-    '''Reservations View, Users will view their pending, accepted, and rejected
+    """Reservations View, Users will view their pending, accepted, and rejected
     Reservations here. They will have the ability to cancel their reservations
-    if they see fit.'''
-    # Get the user object from session
-    user = User.objects.get(id=int(request.user.id))
+    if they see fit."""
     # If POST request to cancel reservation
     if request.POST.get('cancel'):
         # Fetch the event of this reservation via title
         evnt = Event.objects.get(title=request.POST.get('cancel'))
         # If the reservation was not a declined reservation (see MyEvents for details)
-        if Reservation.objects.get(guest=user, event=evnt).accept is not False:
+        if Reservation.objects.get(guest=request.user, event=evnt).accept is not False:
             # Add an open seat to the Event openSeats field
             evnt.openSeats += 1
             evnt.save()
         # Delete the reservation from the system.
-        Reservation.objects.get(event=evnt, guest=user).delete()
+        Reservation.objects.get(event=evnt, guest=request.user).delete()
 
     context_dict = {}
     # Get reservations where the current user is an applicant
-    reservations = Reservation.objects.filter(guest=user)
+    reservations = Reservation.objects.filter(guest=request.user)
     # Store them into a list for displaying
     context_dict['reservations'] = [x for x in reservations]
     # And send it to the renderer.
@@ -212,14 +207,14 @@ def myevents(request):
             evnt.save()
 
     context_dict = {}
-    uid = request.user
-    user = User.objects.get(id=int(uid.id))
-    myevents_list = [x for x in Event.objects.all() if x.host == user]
+    myevents_list = [x for x in Event.objects.all() if x.host == request.user]
     context_dict['event_list'] = []
     for event in myevents_list:
         reservations = Reservation.objects.filter(event=event)
-        context_dict['event_list'].append({"event": event, "guests_u": [x.guest for x in reservations if x.accept is None],
-                                           "guests_a": [x.guest for x in reservations if x.accept]})
+        context_dict['event_list'].append({"event": event,
+                                           "guests_u": [x.guest for x in reservations if x.accept is None],
+                                           "guests_a": [x.guest for x in reservations if x.accept]
+                                           })
     return render(request, 'frijay/myevents.html', context_dict)
 
 

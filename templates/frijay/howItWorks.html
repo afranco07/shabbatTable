@@ -4,9 +4,52 @@
 {% load staticfiles %}
 
 {% block body %}
-<br>
-<br>
-<h1>User Documentation</h1>
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+<!--<style>-->
+    <!--*{-->
+        <!--border: dashed;-->
+    <!--}-->
+<!--</style>-->
+<div class="jumbotron howitworks">
+	<h1 class="display-3"> How It Works </h1>
+    </div>
+<div class="container guest">
+    <div class="row">
+        <p>Join as a Guest</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="media">
+            <div class="media-left">
+                <a href="#">
+                    <img class="media-object image1" src="{% static 'images/image2.jpg' %}" alt="..."></a>
+            </div>
+            <div class="media-body media-middle" style="padding-left: 20px;">
+                <h4 class="media-heading">Join a Dinner</h4>
+                    <p>Pick a dinner which suits you the <br> best. Search for events hosted in <br>
+                        your city and RSVP a seat from <br>the JOIN A DINNER Page <br>
+                    </p>
+            </div>
+        </div>
+        </div>
+<div class="row">
+        <div class="media">
+            <div class="media-body media-middle" style="text-align: right; padding-right: 20px">
+                <h4 class="media-heading">Join a Dinner</h4>
+                    <p>Pick a dinner which suits you the <br> best. Search for events hosted in <br>
+                        your city and RSVP a seat from <br>the JOIN A DINNER Page <br>
+                    </p>
+            </div>
+            <div class="media-right">
+                <a href="#">
+                    <img class="media-object image1" src="{% static 'images/image2.jpg' %}" alt="..."></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 {% endblock %}
 

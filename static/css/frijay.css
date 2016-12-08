@@ -24,7 +24,7 @@
 }
 .jumbotron h1{
     opacity: 0.9;
-    padding-top: 210px;
+    padding-top: 205px;
     font-family: 'Raleway', sans-serif;
     text-align: center;
 }
@@ -65,7 +65,6 @@ input[type=text]:focus {
   outline: 0;
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 3px;
-  font-size: 18px;
   color: black;
   font-weight: 300;
 }
@@ -111,7 +110,7 @@ input[type=text]:focus {
 }
 
 /*Overiding the width of Nav bar collapse to 900*/
-@media (max-width: 900px) {
+@media (max-width: 1050px) {
     .navbar-header {
         float: none;
     }
@@ -152,4 +151,80 @@ input[type=text]:focus {
 }
 .thumbnail.event{
     height: 450px;
+}
+.jumbotron.howitworks{
+    height:450px;
+    background-image: url(../images/user1.jpg);
+    background-size: cover;
+    background-position:center center;
+    margin-bottom: 0px;
+}
+
+.img-circle.image1{
+    width: 304px;
+    height: 236px;
+}
+.media-object.image1{
+    border-radius: 4px;
+     width: 304px;
+    height: 236px;
+}
+.jumbotron.howitworks h1{
+    padding-top: 150px;
+    font-family: 'Josefin Sans', sans-serif;
+    text-align: center;
+}
+.container.guest{
+    opacity: 0.6;
+    color: black;
+    margin-bottom:10px;
+    text-align: center;
+    background: #bdc3c7;
+    background: -webkit-linear-gradient(to left, #bdc3c7 , #2c3e50);
+    background: linear-gradient(to left, #bdc3c7 , #2c3e50);
+    width: 100%;
+}
+.howitworks.steps{
+    font-size: 30px;
+}
+.thumbnail.howitworks{
+    border: none;
+}
+.thumbnail.howitworks img{
+    height: 250px;
+    border-radius: 7px;
+}
+
+
+/*Search*/
+#custom-search-input{
+    padding: 3px;
+    border: solid 1px #bdc3c7;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+#custom-search-input input{
+    border: 0;
+    box-shadow: none;
+}
+
+#custom-search-input button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input .glyphicon-search{
+    font-size: 23px;
 }

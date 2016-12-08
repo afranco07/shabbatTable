@@ -130,7 +130,7 @@ def events(request):
         evnt = Event.objects.get(title=request.POST.get('reserve'))
         evnt.openSeats -= 1
         evnt.save()
-        res = Reservation.objects.get_or_create(event=evnt, guest=user)[0]
+        res = Reservation.objects.get_or_create(event=evnt, guest=request.user)[0]
         res.save()
         send_reservation_sms(request.user, evnt)
 

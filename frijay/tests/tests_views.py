@@ -3,6 +3,7 @@ from django.test import TestCase
 from frijay.models import Event
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.contrib.auth import get_user_model
 
 class ViewsTest(TestCase):
     '''Creates the User, and tests if they can login'''
@@ -129,3 +130,12 @@ class ViewsTest(TestCase):
         response = self.client.get('/events/')
         self.assertContains(response, 'Sorry, no events right now :('
                                       ' Please come back later.')
+
+    def test_login(self):
+        """Test for login"""
+        username = 'ayaz'
+        password = 'test'
+        user = get_user_model()
+        user.objects.create_user(username, password=password)
+        logged_in = self.client.login(username=username, password=password)
+        self.assertTrue(logged_in)

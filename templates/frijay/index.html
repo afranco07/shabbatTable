@@ -17,23 +17,29 @@
 
 
 
-<h3 style="text-align: center">Search For Events</h3>
+<h3 style="text-align: center; font-family: 'Raleway', sans-serif ">Search For Events</h3>
 <div class="container">
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
 
             <form class="form" role="form" method="post" action="{% url 'index' %}">
                     {% csrf_token %}
-                    <div class="form-group">
-                        <input type="text" name="search" id="id_search" class="form-control"
+                     <div id="custom-search-input">
+                         <div class="input-group col-md-12">
+                        <input type="text" name="search" id="id_search" class="form-control input-lg"
                         placeholder="City">
-                    </div>
-                <button class="btn btn-lg btn-default btn-block" type="submit"
-                        value="Submit">Search</button>
-                </form>
+                             <span class="input-group-btn">
+                <button class="btn btn-info btn-lg" type="submit">
+                        <i class="glyphicon glyphicon-search"></i></button>
+                                 </span>
+                             </div>
+                         </div>
+            </form>
         </div>
     </div>
 </div>
+
+
 
 
 <br><br>

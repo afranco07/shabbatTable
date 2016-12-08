@@ -110,7 +110,7 @@ input[type=text]:focus {
 }
 
 /*Overiding the width of Nav bar collapse to 900*/
-@media (max-width: 900px) {
+@media (max-width: 1050px) {
     .navbar-header {
         float: none;
     }

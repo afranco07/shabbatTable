@@ -1,14 +1,11 @@
-{% extends "frijay/base.html" %}
-{% block title %} How It Works
-{% endblock %}
+{% extends 'frijay/base.html' %}
 {% load staticfiles %}
 
+{% block title %}How It Works{% endblock %}
+
+
 {% block body %}
-<!--<style>-->
-    <!--*{-->
-        <!--border: dashed;-->
-    <!--}-->
-<!--</style>-->
+
 <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 <div class="jumbotron howitworks">
 	<h1 class="display-3"> How It Works </h1>
@@ -47,7 +44,7 @@
   </div>
     <div class="col-sm-6 col-md-4">
     <div class="thumbnail howitworks" style="font-family: 'Josefin Sans'">
-       <a href="/reservations"><img src="{% static "images/image6.jpg" %}" alt="My image" /></a>
+       <img src="{% static "images/image6.jpg" %}" alt="My image" />
       <div class="caption">
         <h3><span class="howitworks steps">Step Three:</span>  Enjoy the Dinner</h3>
         <p style="font-size: 15px">Use the given information of the Host in the confirmation text-message
@@ -74,7 +71,7 @@
 
     <div class="col-sm-6 col-md-4">
     <div class="thumbnail howitworks" style="font-family: 'Josefin Sans';">
-       <a href="/host"><img src="{% static "images/background.jpg" %}" alt="My image" /></a>
+       <img src="{% static "images/background.jpg" %}" alt="My image" />
       <div class="caption">
         <h3><span class="howitworks steps">Step Two:</span>  Host a Dinner</h3>
         <p style="font-size: 15px"> After logging in the nav-bar will give you an option of Hosting a Dinner. In
@@ -85,7 +82,7 @@
   </div>
     <div class="col-sm-6 col-md-4">
     <div class="thumbnail howitworks" style="font-family: 'Josefin Sans'">
-       <a href="/myevents"><img src="{% static "images/image3.jpg" %}" alt="My image" /></a>
+       <img src="{% static "images/image3.jpg" %}" alt="My image" />
       <div class="caption">
         <h3><span class="howitworks steps">Step Three:</span>  Approve the guests</h3>
         <p style="font-size: 15px">Now that you are hosting an event, every time a guest reserve a seat in your event

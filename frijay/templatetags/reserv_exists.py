@@ -1,3 +1,4 @@
+'''Checks to see if the reservations exist, returns boolean'''
 from django import template
 from frijay.models import Reservation
 

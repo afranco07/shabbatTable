@@ -1,3 +1,4 @@
+'''Checks to see if you are a host for any event. Prevents Host signing up for their own event'''
 from django import template
 from frijay.models import Event
 

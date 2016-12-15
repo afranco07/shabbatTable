@@ -50,4 +50,4 @@ class TestPages(TestCase):
         html = urlopen('https://shabbattable.herokuapp.com/events/').read()
         soup = BeautifulSoup(html, 'html.parser')
         events = soup.findAll('div', {'class' : 'thumbnail event'})
-        self.assertEquals(len(events), 6)
+        self.assertEquals(len(events), 9)

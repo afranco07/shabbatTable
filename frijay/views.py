@@ -12,12 +12,12 @@ from frijay.twilio import send_reservation_sms
 
 def index(request):
     """ Index Page View """
-    events = Event.objects.filter(openSeats__gt=0)[:4]
+    event = Event.objects.filter(openSeats__gt=0)[:4]
     if request.method == 'POST':
-        events = Event.objects.filter(city__iexact=request.POST.get('search'))
-        context_dict = {'title': "Frijay!", 'Events':events}
+        event = Event.objects.filter(city__iexact=request.POST.get('search'))
+        context_dict = {'title': "Frijay!", 'Events':event}
         return render(request, 'frijay/index.html', context_dict)
-    context_dict = {'title': "Frijay!", 'Events':events}
+    context_dict = {'title': "Frijay!", 'Events':event}
     return render(request, 'frijay/index.html', context_dict)
 
 
@@ -212,30 +212,31 @@ def myevents(request):
     for event in myevents_list:
         reservations = Reservation.objects.filter(event=event)
         context_dict['event_list'].append({"event": event,
-                                           "guests_u": [x.guest for x in reservations if x.accept is None],
+                                           "guests_u": [x.guest for x in reservations
+                                                        if x.accept is None],
                                            "guests_a": [x.guest for x in reservations if x.accept]
-                                           })
+                                          })
     return render(request, 'frijay/myevents.html', context_dict)
 
 
-def reservationsEvent(request, event_id):
+def reservations_event(request, event_id):
     '''Event view for specific event'''
-    eventModel = Event.objects.get(id=event_id)
+    event_model = Event.objects.get(id=event_id)
     context_dict = {'event_id' : event_id,
-                    'event_title' : eventModel.title,
-                    'event_host' : eventModel.host.first_name + " " + eventModel.host.last_name,
-                    'event_city' : eventModel.city,
-                    'event_date' : eventModel.date,
-                    'event_timefrom' : eventModel.time1,
-                    'event_timeto' : eventModel.time2,
-                    'event_seats' : eventModel.openSeats,
-                    'event_details' : eventModel.additionalDetails
+                    'event_title' : event_model.title,
+                    'event_host' : event_model.host.first_name + " " + event_model.host.last_name,
+                    'event_city' : event_model.city,
+                    'event_date' : event_model.date,
+                    'event_timefrom' : event_model.time1,
+                    'event_timeto' : event_model.time2,
+                    'event_seats' : event_model.openSeats,
+                    'event_details' : event_model.additionalDetails
                    }
     return render(request, 'frijay/reservationEventPage.html', context_dict)
 
 
-def howItWorks(request):
+def how_it_works(request):
     '''howitworks page view to show user documentation'''
     context_dict = {'title': "HowItWorks"}
 
-    return render(request, 'frijay/howItWorks.html', context_dict)
+    return render(request, 'frijay/how_it_works.html', context_dict)

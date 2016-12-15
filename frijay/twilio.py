@@ -37,7 +37,7 @@ def send_reservation_sms(user, event):
               + title
               + ". Please review this request at your earliest convenience.\n"
               + "View this reservation at shabbattable.herokuapp.com/myevents/",
-            )
+             )
     )
 
 

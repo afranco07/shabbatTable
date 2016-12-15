@@ -12,12 +12,12 @@ urlpatterns = [
     #reservations page
     url(r'^events/$', views.events, name='events'),
     url(r'^myevents/$', views.myevents, name='myevents'),
-    url(r'^events/(?P<event_id>[0-9]+)/$', views.reservationsEvent, name='reservationsEvent'),
+    url(r'^events/(?P<event_id>[0-9]+)/$', views.reservations_event, name='reservations_event'),
     #temp\/
     url(r'^reservations/', views.reservation, name='reservation'),
-    url(r'^events/(?P<event_id>[0-9]+)/$', views.reservationsEvent, name='reservationsEvent'),
+    url(r'^events/(?P<event_id>[0-9]+)/$', views.reservations_event, name='reservations_event'),
     #specific reservation view
-    # url(r'^events/(?P<event_id>[0-9]+)/$', views.reservationsEvent, name='reservationsEvent'),
+    # url(r'^events/(?P<event_id>[0-9]+)/$', views.reservations_event, name='reservations_event'),
     url(r'^host/', views.host_event, name='host'),
-    url(r'^howitworks/', views.howItWorks, name='howitworks'),
+    url(r'^howitworks/', views.how_it_works, name='howitworks'),
 ]

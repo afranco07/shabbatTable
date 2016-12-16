@@ -50,8 +50,8 @@ def is_valid_number(number):
         response = client.phone_numbers.get(number, include_carrier_info=True)
         response.phone_number  # If invalid, throws an exception.
         return True
-    except TwilioRestException as e:
-        if e.code == 20404:
+    except TwilioRestException as error:
+        if error.code == 20404:
             return False
         else:
-            raise e
+            raise error

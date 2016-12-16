@@ -5,14 +5,11 @@
 from django.test import TestCase
 from frijay.forms import UserForm, EventForm
 
-"""Testing the two forms with input data"""
-
-
 class FormsTest(TestCase):
-
     """Testing the event form by filling form with data"""
 
     def test_valid_data_user(self):
+        """Tests that the information is correctly stored"""
         form = UserForm({
             'first_name': "Avi",
             'last_name': "Kirschenbaum",
@@ -28,8 +25,8 @@ class FormsTest(TestCase):
         self.assertEqual(check.email, "avikirschenbaum@gmail.com")
         self.assertEqual(check.password, "ABC123")
 
-    '''Testing the event form by filling form with data'''
     def test_valid_data_event(self):
+        """Testing the event form by filling form with data"""
         form = EventForm({
             'title': "Shabbat Table",
             'address': "545 Washington Ave",

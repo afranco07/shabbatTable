@@ -1,9 +1,11 @@
+'''Populats db with all the events'''
 from django.core.management.base import BaseCommand
-from frijay.models import Event, Reservation
+from frijay.models import Event
 from django.contrib.auth.models import User
 
-
 class Command(BaseCommand):
+    """Populates db with some events"""
+
     args = '<foo bar ...>'
 
     def _clear_users(self):
@@ -102,12 +104,12 @@ class Command(BaseCommand):
             }
         ]
 
-        for u in users:
+        for user in users:
             usr = User.objects.create_user(
-                u['username'],
-                u['email'],
-                u['password'],
-                first_name=u['first_name'], last_name=u['last_name'])
+                user['username'],
+                user['email'],
+                user['password'],
+                first_name=user['first_name'], last_name=user['last_name'])
             usr.save()
 
     def _populate_events(self):
@@ -215,22 +217,22 @@ class Command(BaseCommand):
             }
         ]
 
-        for e in events:
-            c = Event.objects.get_or_create(
-                title=e['title'],
-                address=e['address'],
-                address2=e['address2'],
-                city=e['city'],
-                state=e['state'],
-                zipcode=e['zipcode'],
-                host=e['host'],
-                phone=e['phone'],
-                date=e['date'],
-                time1=e['time1'],
-                time2=e['time2'],
-                openSeats=e['openSeats'],
-                additionalDetails=e['additionalDetails'])[0]
-            c.save()
+        for event in events:
+            event_list = Event.objects.get_or_create(
+                title=event['title'],
+                address=event['address'],
+                address2=event['address2'],
+                city=event['city'],
+                state=event['state'],
+                zipcode=event['zipcode'],
+                host=event['host'],
+                phone=event['phone'],
+                date=event['date'],
+                time1=event['time1'],
+                time2=event['time2'],
+                openSeats=event['openSeats'],
+                additionalDetails=event['additionalDetails'])[0]
+            event_list.save()
 
     def handle(self, *args, **options):
         print("Clearing users...")

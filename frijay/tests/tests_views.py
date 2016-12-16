@@ -1,4 +1,4 @@
-
+"""These are the tests for the views.py file"""
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
@@ -92,8 +92,8 @@ class ViewsTest(TestCase):
                 'username' : "bobf",
                 'email' : "bob@mail.com",
                 'password' : "temp"}
-        formResponse = self.client.post('/signup/', data)
-        self.assertEqual(formResponse.status_code, 200)
+        form_response = self.client.post('/signup/', data)
+        self.assertEqual(form_response.status_code, 200)
         # form = UserForm(data)
         #self.assertTrue(form.is_valid())
 
@@ -156,12 +156,12 @@ class ViewsTest(TestCase):
         html = response.content
         html = BeautifulSoup(html, "html.parser")
         self.assertEquals(html.title.string, 'Frijay')
-        for x in response.context:
-            self.assertEquals(x['Events'][0].title, 'Shabbat')
-            self.assertEquals(x['Events'][0].address, 'testaddress')
-            self.assertEquals(x['Events'][0].city, 'Brooklyn')
-            self.assertEquals(x['Events'][0].state, 'New York')
-            self.assertEquals(x['Events'][0].phone, 1231231234)
+        for event in response.context:
+            self.assertEquals(event['Events'][0].title, 'Shabbat')
+            self.assertEquals(event['Events'][0].address, 'testaddress')
+            self.assertEquals(event['Events'][0].city, 'Brooklyn')
+            self.assertEquals(event['Events'][0].state, 'New York')
+            self.assertEquals(event['Events'][0].phone, 1231231234)
         event_box = html.body.find(attrs={"class": "hovereffect"})
         self.assertEquals(event_box.h3.string, 'Shabbat')
         self.assertEquals(event_box.h4.string, 'Brooklyn')
@@ -198,18 +198,18 @@ class ViewsTest(TestCase):
         html = response.content
         html = BeautifulSoup(html, "html.parser")
         self.assertEquals(html.title.string, 'Frijay')
-        for x in response.context:
-            self.assertEquals(x['Events'][0].title, 'Frijay')
-            self.assertEquals(x['Events'][0].address, 'testaddress2')
-            self.assertEquals(x['Events'][0].city, 'Queens')
-            self.assertEquals(x['Events'][0].state, 'New York')
-            self.assertEquals(x['Events'][0].phone, 1233213221)
+        for event in response.context:
+            self.assertEquals(event['Events'][0].title, 'Frijay')
+            self.assertEquals(event['Events'][0].address, 'testaddress2')
+            self.assertEquals(event['Events'][0].city, 'Queens')
+            self.assertEquals(event['Events'][0].state, 'New York')
+            self.assertEquals(event['Events'][0].phone, 1233213221)
 
-            self.assertEquals(x['Events'][1].title, 'Shabbat')
-            self.assertEquals(x['Events'][1].address, 'testaddress')
-            self.assertEquals(x['Events'][1].city, 'Brooklyn')
-            self.assertEquals(x['Events'][1].state, 'New York')
-            self.assertEquals(x['Events'][1].phone, 1231231234)
+            self.assertEquals(event['Events'][1].title, 'Shabbat')
+            self.assertEquals(event['Events'][1].address, 'testaddress')
+            self.assertEquals(event['Events'][1].city, 'Brooklyn')
+            self.assertEquals(event['Events'][1].state, 'New York')
+            self.assertEquals(event['Events'][1].phone, 1231231234)
 
         event_box = html.body.find_all(attrs={"class": "hovereffect"})
         self.assertEquals(event_box[0].h3.string, 'Frijay')

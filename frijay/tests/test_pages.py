@@ -18,39 +18,39 @@ class TestPages(TestCase):
         html = urlopen('https://shabbattable.herokuapp.com/').read()
         soup = BeautifulSoup(html, 'html.parser')
         buttons = soup.findAll('a')
-        self.assertEquals(buttons[1].get_text(), ' Join a Dinner')
-        self.assertEquals(buttons[2].get_text(), 'About Us')
-        self.assertEquals(buttons[3].get_text(), 'How It Works')
-        self.assertEquals(buttons[4].get_text(), ' Login')
-        self.assertEquals(buttons[5].get_text(), ' Sign Up')
+        self.assertEqual(buttons[1].get_text(), ' Join a Dinner')
+        self.assertEqual(buttons[2].get_text(), 'About Us')
+        self.assertEqual(buttons[3].get_text(), 'How It Works')
+        self.assertEqual(buttons[4].get_text(), ' Login')
+        self.assertEqual(buttons[5].get_text(), ' Sign Up')
 
     def test_homepage_title(self):
         """Checks that the title is correct on the homepage"""
         html = urlopen('https://shabbattable.herokuapp.com/').read()
         soup = BeautifulSoup(html, 'html.parser')
-        self.assertEquals(soup.title.get_text(), 'Frijay')
+        self.assertEqual(soup.title.get_text(), 'Frijay')
 
     def test_event_title(self):
         """Checks that the title is correcdt on the events page"""
         html = urlopen('https://shabbattable.herokuapp.com/events/').read()
         soup = BeautifulSoup(html, 'html.parser')
-        self.assertEquals(soup.title.get_text(), 'Events Page')
+        self.assertEqual(soup.title.get_text(), 'Events Page')
 
     def test_about_title(self):
         """Checks that the title is correct on the about page"""
         html = urlopen('https://shabbattable.herokuapp.com/about/').read()
         soup = BeautifulSoup(html, 'html.parser')
-        self.assertEquals(soup.title.get_text(), ' About Us ')
+        self.assertEqual(soup.title.get_text(), ' About Us ')
 
     def test_how_works_title(self):
         """Checks the title on the how it works page"""
         html = urlopen('https://shabbattable.herokuapp.com/howitworks/').read()
         soup = BeautifulSoup(html, 'html.parser')
-        self.assertEquals(soup.title.get_text(), 'How It Works')
+        self.assertEqual(soup.title.get_text(), 'How It Works')
 
     def test_number_of_events(self):
         """Checks that the events page has the correct number of events from db"""
         html = urlopen('https://shabbattable.herokuapp.com/events/').read()
         soup = BeautifulSoup(html, 'html.parser')
         events = soup.findAll('div', {'class' : 'thumbnail event'})
-        self.assertEquals(len(events), 9)
+        self.assertEqual(len(events), 9)

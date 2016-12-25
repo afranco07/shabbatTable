@@ -1,3 +1,4 @@
+'''Class that fetches the users reservations'''
 from django import template
 from frijay.models import Reservation, Event
 

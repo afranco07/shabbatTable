@@ -17,8 +17,11 @@ pip install -r requirements.txt
 sh reset_db.sh
 ```
 3. At this point, dummy data has been inserted into the database, along with your administrative user account. 
+
 * Username: frijay 
+
 * Password(default): frijay_pass
+
 4. Now, launch server:
 ```
 #!bash

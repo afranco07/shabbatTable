@@ -1,10 +1,35 @@
-To run the server on local instance, run 
+**SHABBATTABLE**
+*Frijay - Friday Dinners*
+
+### Instructions for First Time Usage ###
+
+1.Create your own virtualenv (Python 3.5.2) and install required dependancies:
+```
+#!bash
+
+pip install -r requirements.txt
+```
+2.Initialize the database by running the supplied shell script:
+
+```
+#!bash
+
+sh reset_db.sh
+```
+3.At this point, dummy data has been inserted into the database, along with your administrative user account. 
+
+* Username: frijay 
+
+* Password(default): frijay_pass
+
+4.Now, launch server:
 ```
 #!bash
 
 python manage.py runserver
 ```
 
+### Additional Information ###
 On production, this website should be launched using gunicorn.
 ```
 #!bash

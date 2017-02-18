@@ -50,3 +50,6 @@ In addition, developer documentation can be found on the wiki.
 The admin panel can be reached at 127.0.0.1:8000/admin/
 
 Website is deployed at [heroku](https://shabbattable.herokuapp.com/)
+
+### Demo ###
+![Frijay demo](https://github.com/afranco07/shabbatTable/blob/master/frijayDemo.gif?raw=true)
